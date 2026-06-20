@@ -1,0 +1,39 @@
+{
+  "name": "living-testbed-portfolio",
+  "private": true,
+  "version": "0.0.0",
+  "description": "A personal portfolio that is more than a résumé — a living testbed of interactive-media experiments.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jumbocrayon/portfolio-site.git"
+  },
+  "author": "Jess Loeb",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/jumbocrayon/portfolio-site/issues"
+  },
+  "homepage": "https://github.com/jumbocrayon/portfolio-site#readme",
+  "dependencies": {
+    "motion": "^11.15.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.1.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^26.0.0",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
+    "@vitejs/plugin-react": "^4.3.4",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5"
+  }
+}

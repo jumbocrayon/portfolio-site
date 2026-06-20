@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+/*
+  Design tokens — the handmade layer.
+  The medium is the message: warmth, ink, and paper, not corporate slate.
+  Everything here is meant to feel like a sketchbook left open on a workbench.
+*/
+@theme {
+  /* Paper & ink — the base palette */
+  --color-paper: #faf6ee;        /* warm off-white, like sketch paper */
+  --color-paper-deep: #f0e9da;   /* a shade down, for cards on paper */
+  --color-ink: #2b2622;          /* soft near-black, never pure #000 */
+  --color-ink-soft: #5c534a;     /* muted ink for secondary text */
+
+  /* Accents — playful but grounded */
+  --color-marker: #e0603a;       /* warm orange marker — the "poke me" color */
+  --color-highlight: #f4c95d;    /* highlighter yellow */
+  --color-sky: #6ba3b8;          /* dusty teal — depth / systems cue */
+  --color-grow: #7a9a6e;         /* sage green — "in progress / alive" */
+
+  /* Hand-drawn type. System stack as a stand-in until real fonts land. */
+  --font-hand: "Bradley Hand", "Comic Sans MS", "Segoe Print", cursive;
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Slight off-grid rotations for the "pinned by hand" feel */
+  --rotate-tilt: -1.2deg;
+  --rotate-tilt-r: 1.4deg;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  /* faint paper grain: layered dot + line texture, very subtle */
+  background-image:
+    radial-gradient(var(--color-paper-deep) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* A hand-drawn underline utility used across the surface */
+@utility ink-underline {
+  background-image: linear-gradient(
+    to right,
+    var(--color-marker) 0%,
+    var(--color-marker) 100%
+  );
+  background-repeat: no-repeat;
+  background-position: 0 92%;
+  background-size: 100% 0.18em;
+}
+
+/* Respect reduced-motion: whimsy should never fight accessibility */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

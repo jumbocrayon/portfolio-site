@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="6" fill="#faf6ee"/>
+  <!-- a hand-drawn-ish 'J' mark in marker orange -->
+  <path d="M20 7c.4 4 .6 9 .3 13.5C20.1 25 17 27 13 26c-3-.8-4.3-3.2-4-6"
+        fill="none" stroke="#e0603a" stroke-width="3"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="20.2" cy="7" r="1.8" fill="#2b2622"/>
+</svg>
