@@ -7,7 +7,7 @@ import { NavLink, Outlet } from "react-router-dom";
  */
 const NAV = [
   { to: "/", label: "Workbench", end: true },
-  { to: "/about", label: "How I work", end: false },
+  { to: "/about", label: "How I play", end: false },
   { to: "/dev-blog", label: "Dev blog", end: false },
 ];
 

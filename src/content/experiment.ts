@@ -20,7 +20,7 @@ export type DemoComponent = ComponentType<Record<string, never>>;
 
 /**
  * Progressive-disclosure depth. The visitor meets `whatItIs` first, can open
- * `howItWorks`, and only falls all the way to `systems` if they want to.
+ * `howItWorks`, and reaches `systems` only if they choose to.
  * Each section is optional so a spark-test can ship with just a surface.
  */
 export interface DepthSections {
@@ -37,7 +37,7 @@ export interface Experiment {
   slug: string;
   /** Display title. */
   title: string;
-  /** The whimsy hook — one playful line that makes you want to poke it. */
+  /** The whimsy hook: one playful line that makes you want to look closer. */
   hook: string;
   /** Life stage; controls the alive/in-progress affordances. */
   status: ExperimentStatus;

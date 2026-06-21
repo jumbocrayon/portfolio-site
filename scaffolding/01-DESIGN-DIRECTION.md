@@ -25,6 +25,7 @@ A **collection of demos / living testbed**, not a linear narrative or a project 
 - First person, warm, clever-not-arrogant, compassionate-not-soft.
 - Communicate systems thinking in human terms.
 - No buzzword soup. Premium is conveyed by the work doing the convincing, never by claiming it.
+- **Register is playful-PRECISE, not playful-casual:** whimsy proposes, rigor delivers. See `03-VOICE-GUIDELINES.md` for the full diction do/don't list, the "one quiet anchor" credibility rule, and the 5-question self-check — required reading before writing any visitor-facing copy.
 
 ## Anti-goals (what to avoid)
 - A traditional case-study grid that reads like a portfolio template.

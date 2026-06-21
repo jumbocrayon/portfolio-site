@@ -6,7 +6,36 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:5173/)",
       "Bash(curl -s http://localhost:5173/src/main.tsx)",
       "Bash(curl -s http://localhost:5173/)",
-      "Bash(curl -s \"http://localhost:5173/src/index.css\")"
+      "Bash(curl -s \"http://localhost:5173/src/index.css\")",
+      "Bash(brew install *)",
+      "Bash(/opt/homebrew/bin/pdftotext \"/Users/jessloeb/Development/Personal/portfolio/resources/Jess_Loeb_CV.pdf\" -)",
+      "Bash(npx tsc *)",
+      "Bash(chmod +x /Users/jessloeb/Development/Personal/portfolio/.claude/hooks/voice-check.sh)",
+      "Bash(python3 -m json.tool .claude/settings.json)",
+      "Bash(.claude/hooks/voice-check.sh)",
+      "Bash(python3 -c \"import json,sys; print\\(json.load\\(sys.stdin\\).get\\('scripts',{}\\)\\)\")",
+      "Bash(break)",
+      "Bash(curl -s \"http://localhost:5173/src/pages/Workbench.tsx\")",
+      "Bash(curl -s -o /dev/null -w \"home: %{http_code}\\\\n\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"tryit-demo: %{http_code}\\\\n\" \"http://localhost:5173/src/demos/TryItBox.tsx\")",
+      "Bash(curl -s -o /dev/null -w \"about: %{http_code}\\\\n\" \"http://localhost:5173/src/pages/About.tsx\")",
+      "Bash(curl -s \"http://localhost:5173/src/pages/About.tsx\")",
+      "Bash(curl -s \"http://localhost:5173/src/App.tsx\")",
+      "Bash(kill %1)",
+      "Bash(pkill -f \"vite\")"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/voice-check.sh"
+          }
+        ]
+      }
     ]
   }
 }

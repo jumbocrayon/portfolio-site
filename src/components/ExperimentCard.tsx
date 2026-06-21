@@ -48,7 +48,7 @@ export default function ExperimentCard({
           ))}
         </div>
 
-        <p className="mt-4 font-hand text-sm text-marker">poke this experiment →</p>
+        <p className="mt-4 font-hand text-sm text-marker">take a closer look →</p>
       </Link>
     </motion.div>
   );

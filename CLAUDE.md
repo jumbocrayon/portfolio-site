@@ -1,14 +1,15 @@
 # CLAUDE.md — Living Testbed Portfolio
 
 ## What this project is
-A personal portfolio website that is **more than a résumé** — it's a "living testbed" where Jess runs her own interactive-media experiments in public. The site demonstrates how she works by being built the same way she'd run an engagement. **The medium is the message:** the site's structure mirrors her operating values because they're the same commitments.
+A personal portfolio website that is **more than a résumé** — it's a "living testbed" where Jess tests her own ideas about interactive media in the open. The site demonstrates how she works by being built the same way she'd run an engagement. **The medium is the message:** the site's structure mirrors her operating values because they're the same commitments.
 
 **Current scope: build the portfolio SHELL/scaffolding only.** The dev blog is a separate, later content stream — stub its route, do not build it. The centerpiece demo (comic-vignette engine) is a placeholder slot for now.
 
 ## Seed docs (read these first, in order)
-- `00-PROJECT-BRIEF.md` — positioning, thesis, audience, strategic purpose, full content map
-- `01-DESIGN-DIRECTION.md` — look/feel: whimsy → depth → values, handmade aesthetic, anti-goals
-- `02-SCAFFOLDING-SPEC.md` — stack, information architecture, core abstractions, v0 acceptance criteria, first tasks
+- `scaffolding/00-PROJECT-BRIEF.md` — positioning, thesis, audience, strategic purpose, full content map
+- `scaffolding/01-DESIGN-DIRECTION.md` — look/feel: whimsy → depth → values, handmade aesthetic, anti-goals
+- `scaffolding/02-SCAFFOLDING-SPEC.md` — stack, information architecture, core abstractions, v0 acceptance criteria, first tasks
+- `scaffolding/03-VOICE-GUIDELINES.md` — **read before writing or revising ANY visitor-facing copy.** The playful-precise register, diction do/don't list, the "one quiet anchor" credibility rule, and a 5-question self-check. A PostToolUse hook surfaces the check whenever copy files are edited.
 
 ## The thesis the whole site argues
 "Applied curiosity + caring about how creative groups use available resources = art meets science in unimaginably cool places, and I curate those spaces. I set technical foundations where curiosity and magic can later happen."
