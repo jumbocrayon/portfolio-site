@@ -10,11 +10,14 @@ export default function ExperimentPage() {
   if (!experiment) {
     return (
       <div className="mx-auto max-w-2xl text-center">
-        <h1 className="font-hand text-3xl">No experiment here (yet).</h1>
-        <p className="mt-3 text-ink-soft">
+        <h1 className="font-display text-3xl font-bold tracking-tight">No experiment here (yet).</h1>
+        <p className="mt-3 text-content-muted">
           This slot is empty — maybe it's still on the workbench.
         </p>
-        <Link to="/" className="mt-6 inline-block font-hand text-marker">
+        <Link
+          to="/"
+          className="mt-6 inline-block font-display font-medium text-accent hover:text-accent-hover"
+        >
           ← back to the workbench
         </Link>
       </div>
@@ -23,7 +26,10 @@ export default function ExperimentPage() {
 
   return (
     <>
-      <Link to="/" className="mb-6 inline-block font-hand text-marker">
+      <Link
+        to="/"
+        className="mb-6 inline-block font-display font-medium text-accent hover:text-accent-hover"
+      >
         ← back to the workbench
       </Link>
       <ExperimentDetail experiment={experiment} />

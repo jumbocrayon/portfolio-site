@@ -22,7 +22,25 @@
       "Bash(curl -s \"http://localhost:5173/src/pages/About.tsx\")",
       "Bash(curl -s \"http://localhost:5173/src/App.tsx\")",
       "Bash(kill %1)",
-      "Bash(pkill -f \"vite\")"
+      "Bash(pkill -f \"vite\")",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\({**d.get\\('dependencies',{}\\),**d.get\\('devDependencies',{}\\)},indent=2\\)\\)\")",
+      "Bash(npx vite *)",
+      "Skill(artifact-design)",
+      "Skill(artifact-design:*)",
+      "Bash(fc-list : family)",
+      "Bash(fc-list)",
+      "Read(//System/Library/Fonts/**)",
+      "Bash(python3 -c \"import fontTools; print\\('fonttools', fontTools.version\\)\")",
+      "Bash(python3 -c \"import brotli; print\\('brotli ok'\\)\")",
+      "Bash(curl -s http://localhost:4319/ -o /dev/null -w \"HTTP %{http_code}\\\\n\")",
+      "Read(//tmp/**)",
+      "Read(//Applications/**)",
+      "Read(//Users/jessloeb/.cache/**)",
+      "Bash(node -e \"try{require\\('playwright'\\);console.log\\('playwright installed'\\)}catch\\(e\\){console.log\\('no playwright module'\\)}\")",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --force-color-profile=srgb --window-size=1200,1600 --screenshot=/private/tmp/claude-501/-Users-jessloeb-Development-Personal-portfolio/07b7d407-1610-41df-a84d-5723a37b8324/scratchpad/site-light.png http://localhost:4319/)",
+      "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --force-color-profile=srgb --force-dark-mode --window-size=1200,1600 --screenshot=/private/tmp/claude-501/-Users-jessloeb-Development-Personal-portfolio/07b7d407-1610-41df-a84d-5723a37b8324/scratchpad/site-dark-raw.png http://localhost:4319/)",
+      "Bash(pkill -f \"vite preview\")",
+      "Bash(git add *)"
     ]
   },
   "hooks": {

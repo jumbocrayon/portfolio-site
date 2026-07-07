@@ -18,14 +18,16 @@ export default function ExperimentDetail({ experiment }: { experiment: Experimen
       {/* Surface: status, title, hook, the touchable thing. */}
       <header className="mb-8">
         <AliveIndicator status={experiment.status} updatedAt={experiment.updatedAt} />
-        <h1 className="mt-3 font-hand text-4xl leading-tight">{experiment.title}</h1>
-        <p className="mt-3 text-lg text-ink-soft">{experiment.hook}</p>
+        <h1 className="mt-3 font-display text-4xl font-bold leading-tight tracking-tight text-balance">
+          {experiment.title}
+        </h1>
+        <p className="mt-3 text-lg text-content-muted">{experiment.hook}</p>
       </header>
 
       <section className="mb-10">
         <DemoSlot demo={experiment.demo} placeholderLabel={experiment.title} />
         {experiment.shareableArtifact && (
-          <p className="mt-3 text-center text-xs text-ink-soft/70">
+          <p className="mt-3 text-center text-xs text-content-muted/80">
             produces: {experiment.shareableArtifact}
           </p>
         )}
@@ -60,25 +62,25 @@ function DepthSection({
   title: string;
   children: React.ReactNode;
   defaultOpen?: boolean;
-  /** The deepest layer (systems) gets the teal "depth" cue. */
+  /** The deepest layer (systems) gets the purple "depth" cue. */
   accent?: boolean;
 }) {
   const [open, setOpen] = useState(defaultOpen);
 
   return (
     <div
-      className={`overflow-hidden rounded-xl border-2 ${
-        accent ? "border-sky/50 bg-sky/5" : "border-ink/15 bg-paper"
+      className={`overflow-hidden rounded-xl border bg-surface ${
+        accent ? "border-accent/40" : "border-line"
       }`}
     >
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between px-5 py-3 text-left font-hand text-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-marker"
+        className="flex w-full items-center justify-between px-5 py-3.5 text-left font-display text-lg font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <span className={accent ? "text-sky" : ""}>{title}</span>
-        <motion.span animate={{ rotate: open ? 90 : 0 }} className="text-marker">
+        <span className={accent ? "text-accent" : ""}>{title}</span>
+        <motion.span animate={{ rotate: open ? 90 : 0 }} className="text-accent">
           →
         </motion.span>
       </button>
@@ -90,7 +92,7 @@ function DepthSection({
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.25 }}
           >
-            <p className="px-5 pb-4 leading-relaxed text-ink-soft">{children}</p>
+            <p className="px-5 pb-4 leading-relaxed text-content-muted">{children}</p>
           </motion.div>
         )}
       </AnimatePresence>

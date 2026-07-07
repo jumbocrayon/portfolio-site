@@ -4,51 +4,53 @@ import type { Experiment } from "@/content/experiment";
 import AliveIndicator from "./AliveIndicator";
 
 /**
- * ExperimentCard — the playful surface tile for the Workbench.
+ * ExperimentCard — the surface tile for the Workbench.
  *
- * Whimsy first: it sits slightly off-grid (hand-pinned), lifts and straightens
- * when you reach for it, and leads with the hook — not a case-study headline.
- * Depth is implied, never forced: the card only promises "there's more here."
+ * Professional and calm at rest; the whimsy is behavioral — it lifts toward you
+ * when you reach for it, and the "closer look" cue slides in. It leads with the
+ * hook, not a case-study headline. Depth is implied, never forced: the card only
+ * promises "there's more here."
  */
 export default function ExperimentCard({
   experiment,
-  tilt,
 }: {
   experiment: Experiment;
-  /** Alternating tilt so the board feels hand-arranged. */
-  tilt: "l" | "r";
 }) {
-  const rotate = tilt === "l" ? "var(--rotate-tilt)" : "var(--rotate-tilt-r)";
-
   return (
     <motion.div
-      style={{ rotate }}
-      whileHover={{ rotate: 0, y: -6, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      whileHover={{ y: -4 }}
+      transition={{ type: "spring", stiffness: 300, damping: 24 }}
+      className="h-full"
     >
       <Link
         to={`/experiment/${experiment.slug}`}
-        className="block h-full rounded-2xl border-2 border-ink bg-paper p-5 shadow-[4px_4px_0_0_var(--color-ink)] focus:outline-none focus-visible:ring-2 focus-visible:ring-marker"
+        className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-6 shadow-sm transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
       >
-        <div className="mb-3 flex items-center justify-between gap-2">
+        <div className="mb-4 flex items-center justify-between gap-2">
           <AliveIndicator status={experiment.status} updatedAt={experiment.updatedAt} />
         </div>
 
-        <h3 className="font-hand text-2xl leading-tight">{experiment.title}</h3>
-        <p className="mt-2 text-ink-soft">{experiment.hook}</p>
+        <h3 className="font-display text-xl font-semibold leading-tight tracking-tight">
+          {experiment.title}
+        </h3>
+        <p className="mt-2 text-content-muted">{experiment.hook}</p>
 
         <div className="mt-4 flex flex-wrap gap-1.5">
           {experiment.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full border border-ink/20 bg-paper-deep px-2 py-0.5 text-xs text-ink-soft"
+              className="rounded-full border border-line px-2.5 py-0.5 text-xs text-content-muted"
             >
               {tag}
             </span>
           ))}
         </div>
 
-        <p className="mt-4 font-hand text-sm text-marker">take a closer look →</p>
+        <p className="mt-5 font-display text-sm font-medium text-accent">
+          <span className="inline-block transition-transform group-hover:translate-x-0.5">
+            take a closer look →
+          </span>
+        </p>
       </Link>
     </motion.div>
   );

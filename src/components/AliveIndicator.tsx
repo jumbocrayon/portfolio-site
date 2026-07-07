@@ -4,9 +4,17 @@ const STATUS_META: Record<
   ExperimentStatus,
   { label: string; dot: string; text: string }
 > = {
-  live: { label: "live", dot: "bg-grow", text: "text-grow" },
-  "in-progress": { label: "in progress", dot: "bg-highlight", text: "text-ink-soft" },
-  "spark-test": { label: "spark test", dot: "bg-marker", text: "text-marker" },
+  live: { label: "live", dot: "bg-status-live", text: "text-status-live" },
+  "in-progress": {
+    label: "in progress",
+    dot: "bg-status-progress",
+    text: "text-status-progress",
+  },
+  "spark-test": {
+    label: "spark test",
+    dot: "bg-status-spark",
+    text: "text-status-spark",
+  },
 };
 
 /**
@@ -30,9 +38,9 @@ export default function AliveIndicator({
         />
         <span className={`relative inline-flex size-2.5 rounded-full ${meta.dot}`} />
       </span>
-      <span className={`font-hand ${meta.text}`}>{meta.label}</span>
+      <span className={`font-display font-medium ${meta.text}`}>{meta.label}</span>
       {updatedAt && (
-        <span className="text-ink-soft/60">· updated {updatedAt}</span>
+        <span className="text-content-muted/70">· updated {updatedAt}</span>
       )}
     </span>
   );

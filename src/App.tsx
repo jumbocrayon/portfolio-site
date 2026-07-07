@@ -1,9 +1,11 @@
 import { NavLink, Outlet } from "react-router-dom";
+import ThemeToggle from "@/components/ThemeToggle";
 
 /**
- * The site shell: a light, handmade frame around every page.
- * Nav reads like tabs clipped to a board; the footer carries the
- * build-in-public signal that the whole site is alive and evolving.
+ * The site shell: a calm, professional frame around every page.
+ * The nav indicator is the one place purple does its job — an accent underline
+ * under the active route. The footer carries the build-in-public signal that
+ * the whole site is alive and evolving.
  */
 const NAV = [
   { to: "/", label: "Workbench", end: true },
@@ -14,40 +16,49 @@ const NAV = [
 export default function App() {
   return (
     <div className="flex min-h-dvh flex-col">
-      <header className="px-6 py-5">
+      <header className="border-b border-line px-6 py-4">
         <nav className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-4">
-          <NavLink to="/" className="font-hand text-xl">
-            Jess Loeb<span className="text-marker">.</span>
+          <NavLink
+            to="/"
+            className="font-display text-lg font-semibold tracking-tight"
+          >
+            Jess Loeb
           </NavLink>
-          <ul className="flex flex-wrap items-center gap-1">
-            {NAV.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  end={item.end}
-                  className={({ isActive }) =>
-                    `rounded-full px-3 py-1.5 font-hand text-sm transition-colors ${
-                      isActive
-                        ? "bg-ink text-paper"
-                        : "text-ink-soft hover:bg-paper-deep"
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-center gap-1 sm:gap-2">
+            <ul className="flex flex-wrap items-center gap-1">
+              {NAV.map((item) => (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    end={item.end}
+                    className={({ isActive }) =>
+                      `relative rounded-md px-3 py-1.5 font-display text-sm font-medium transition-colors ${
+                        isActive
+                          ? "text-accent after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-accent"
+                          : "text-content-muted hover:text-content"
+                      }`
+                    }
+                  >
+                    {item.label}
+                  </NavLink>
+                </li>
+              ))}
+            </ul>
+            <ThemeToggle />
+          </div>
         </nav>
       </header>
 
-      <main className="flex-1 px-6 py-8">
+      <main className="flex-1 px-6 py-12">
         <Outlet />
       </main>
 
-      <footer className="px-6 py-8 text-center text-xs text-ink-soft/70">
+      <footer className="border-t border-line px-6 py-8 text-center text-xs text-content-muted">
         <span className="inline-flex items-center gap-2">
-          <span className="size-2 animate-pulse rounded-full bg-grow" aria-hidden />
+          <span
+            className="size-2 animate-pulse rounded-full bg-status-live"
+            aria-hidden
+          />
           built in public — this site is alive and evolving
         </span>
       </footer>

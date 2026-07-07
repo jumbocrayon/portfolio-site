@@ -34,8 +34,10 @@ const ENGAGEMENTS = [
 export default function About() {
   return (
     <div className="mx-auto max-w-2xl">
-      <h1 className="font-hand text-4xl leading-tight">How I play</h1>
-      <p className="mt-4 text-lg text-ink-soft">
+      <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-balance">
+        How I play
+      </h1>
+      <p className="mt-4 text-lg text-content-muted">
         Play is infrastructure. Someone has to build the systems, teams, and
         culture that make it possible at scale, and that's the work I take on. I
         move between strategic framing and hands-on systems engineering, and I
@@ -47,11 +49,15 @@ export default function About() {
         {ENGAGEMENTS.map((e) => (
           <div
             key={e.title}
-            className="rounded-2xl border-2 border-ink/15 bg-paper p-6 shadow-[3px_3px_0_0_rgba(43,38,34,0.08)]"
+            className="rounded-2xl border border-line bg-surface p-6 shadow-sm"
           >
-            <h2 className="font-hand text-2xl text-marker">{e.title}</h2>
-            <p className="mt-1 font-hand text-lg leading-snug">{e.hook}</p>
-            <p className="mt-3 leading-relaxed text-ink-soft">{e.body}</p>
+            <h2 className="font-display text-xl font-semibold tracking-tight text-accent">
+              {e.title}
+            </h2>
+            <p className="mt-1.5 font-display text-lg font-medium leading-snug">
+              {e.hook}
+            </p>
+            <p className="mt-3 leading-relaxed text-content-muted">{e.body}</p>
           </div>
         ))}
       </div>

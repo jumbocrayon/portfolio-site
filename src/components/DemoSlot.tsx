@@ -20,7 +20,7 @@ interface DemoSlotProps {
  */
 export default function DemoSlot({ demo: Demo, placeholderLabel }: DemoSlotProps) {
   return (
-    <div className="relative rounded-2xl border-2 border-dashed border-ink/30 bg-paper-deep/40 p-4">
+    <div className="relative rounded-2xl border border-dashed border-line bg-surface/50 p-4">
       {Demo ? (
         <Suspense fallback={<SlotFallback label="warming up…" />}>
           <Demo />
@@ -34,7 +34,7 @@ export default function DemoSlot({ demo: Demo, placeholderLabel }: DemoSlotProps
 
 function SlotFallback({ label }: { label: string }) {
   return (
-    <p className="py-8 text-center font-hand text-ink-soft">{label}</p>
+    <p className="py-8 text-center font-display text-content-muted">{label}</p>
   );
 }
 
@@ -42,13 +42,13 @@ function ComingAlive({ label }: { label?: string }) {
   return (
     <div className="flex flex-col items-center gap-2 py-10 text-center">
       <span
-        className="inline-block size-3 animate-pulse rounded-full bg-grow"
+        className="inline-block size-3 animate-pulse rounded-full bg-status-live"
         aria-hidden
       />
-      <p className="font-hand text-lg text-ink-soft">
+      <p className="font-display text-lg text-content-muted">
         {label ?? "this experiment"} is coming alive
       </p>
-      <p className="text-xs text-ink-soft/70">a demo will live in this slot</p>
+      <p className="text-xs text-content-muted/70">a demo will live in this slot</p>
     </div>
   );
 }

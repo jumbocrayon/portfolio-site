@@ -25,20 +25,19 @@ export default function TryItBox() {
       <motion.button
         type="button"
         onClick={() => setTurns((n) => n + 1)}
-        whileTap={{ scale: 0.88, rotate: -4 }}
-        animate={turns > 0 ? { rotate: [0, -3, 3, 0] } : undefined}
+        whileTap={{ scale: 0.92 }}
+        animate={turns > 0 ? { rotate: [0, -2, 2, 0] } : undefined}
         transition={{ duration: 0.3 }}
-        className="rounded-2xl border-2 border-ink bg-marker px-6 py-4 font-hand text-lg text-paper shadow-[3px_3px_0_0_var(--color-ink)] active:shadow-[1px_1px_0_0_var(--color-ink)]"
-        style={{ rotate: "var(--rotate-tilt)" }}
+        className="rounded-xl bg-accent px-6 py-3.5 font-display text-lg font-semibold text-accent-contrast shadow-sm transition-shadow hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-page"
         aria-label="Give it a turn"
       >
         try it
       </motion.button>
-      <p className="min-h-6 font-hand text-ink-soft" aria-live="polite">
+      <p className="min-h-6 font-display text-content-muted" aria-live="polite">
         {reaction}
       </p>
       {turns > 0 && (
-        <p className="text-xs text-ink-soft/70">
+        <p className="text-xs text-content-muted/70">
           {turns} {turns === 1 ? "turn" : "turns"} so far
         </p>
       )}

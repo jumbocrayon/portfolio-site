@@ -17,13 +17,13 @@ export default function Workbench() {
         animate={{ opacity: 1, y: 0 }}
         className="mb-12 max-w-2xl"
       >
-        <h1 className="font-hand text-4xl leading-tight sm:text-5xl">
+        <h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight text-balance sm:text-5xl">
           Jess Loeb
         </h1>
-        <p className="mt-2 font-hand text-lg text-marker">
+        <p className="mt-3 font-display text-lg font-medium text-accent">
           Curious content, built in the open.
         </p>
-        <p className="mt-4 text-lg text-ink-soft">
+        <p className="mt-5 text-lg text-content-muted">
           More like a workbench than a résumé. I bring the instincts I used to ship a
           console launch to ideas about interactive media, technology patterns, and development processes
           and showcase thoughts, demos and analysis along the way. Some pieces are finished, some still have
@@ -32,16 +32,12 @@ export default function Workbench() {
       </motion.header>
 
       <section>
-        <h2 className="mb-5 font-hand text-2xl text-ink-soft">
+        <h2 className="mb-5 font-display text-xs font-semibold uppercase tracking-[0.14em] text-content-muted">
           Selected experiments
         </h2>
         <div className="grid gap-6 sm:grid-cols-2">
-          {experiments.map((experiment, i) => (
-            <ExperimentCard
-              key={experiment.slug}
-              experiment={experiment}
-              tilt={i % 2 === 0 ? "l" : "r"}
-            />
+          {experiments.map((experiment) => (
+            <ExperimentCard key={experiment.slug} experiment={experiment} />
           ))}
         </div>
       </section>
