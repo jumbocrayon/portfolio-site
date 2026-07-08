@@ -29,18 +29,21 @@
 
   All text pairings below pass WCAG AA (most AAA). Validated combinations:
     - text on any light surface: green-deep / neutral-dark / purple  -> AAA
-    - accent on green-deep or neutral-dark: MUST use purple-light      -> AA (>=18px/bold)
-    - purple-light on hunter green (#274a30) is 4.09:1 = AA-large only;
-      for SMALL purple text on the green, step up to #c4b0e8.
-    - never purple (#5F349C) on a dark green; use purple-light instead.
+    - accent on teal-deep or neutral-dark: MUST use purple-light       -> AA (>=18px/bold)
+    - purple-light on teal-deep (#16525c) is 4.07:1 = AA-large only;
+      for SMALL purple text on the teal, step up to #c4b0e8.
+    - never purple (#5F349C) on a dark surface; use purple-light instead.
+    - dark-mode surface is teal-deep (brighter, cyan-leaning) — NOT the
+      hunter green-deep, which stays the LIGHT-mode surface-strong / hero.
 */
 
 @theme {
   /* ---- Raw brand anchors (do not use directly in components) ---- */
-  --color-green-deep: #274a30;    /* 60% — dominant surface / dark UI (hunter green) */
+  --color-green-deep: #274a30;    /* 60% — LIGHT-mode surface-strong / hero (hunter green) */
+  --color-teal-deep: #16525c;     /* dark-mode surface — brighter, cyan-leaning green */
   --color-green-light: #e5f5e6;   /* 30% — panels, cards, light fills */
   --color-purple: #5f349c;        /* 10% — accent on LIGHT surfaces */
-  --color-purple-light: #b39ae0;  /* accent on DARK surfaces (AA on green-deep) */
+  --color-purple-light: #bda6e6;  /* accent on DARK surfaces (AA on teal-deep, 4.07:1) */
   --color-neutral-light: #e9eae3; /* light page background */
   --color-neutral-dark: #1c1e33;  /* indigo — darkest surface / text on light */
 
@@ -80,7 +83,7 @@
 
 [data-theme="dark"] {
   --bg: var(--color-neutral-dark);
-  --surface: var(--color-green-deep);
+  --surface: var(--color-teal-deep);
   --surface-strong: var(--color-green-light);
   --text: var(--color-green-light);
   --text-muted: var(--color-green-muted-dark);
