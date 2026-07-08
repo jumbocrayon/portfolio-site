@@ -95,8 +95,8 @@ export const about: AboutContent = {
   tagline: "Applied systems-thinking, curiosity-led imagination.",
   stats: [
     { value: "24M+", label: "players launched, zero downtime" },
-    { value: "2.5 yrs", label: "of dev time saved for partners" },
-    { value: "2 → 30", label: "grown from a two-person team" },
+    { value: "2.5 yrs", label: "saved for studio partners through developer solutions" },
+    { value: "0 → 1", label: "a diverse engineering department, built from scratch" },
     { value: "~20 yrs", label: "across engineering and business" },
   ],
   highlights: [
