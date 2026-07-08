@@ -1,0 +1,251 @@
+---
+slug: reconciliation
+title: "How do you know that string goes in that box?"
+hook: "One recovering game dev, one long weekend, and an AI fit-checker that measured everything against mappings it had quietly invented."
+tags: ["localization", "unity", "genAI", "solodev", "devblog"]
+publishedAt: "2026-07-08"
+draft: false
+---
+
+I asked an AI collaborator to build me a localization fit-checker for my game,
+and it built a beautiful one that measured fit against mappings it had invented.
+The meter was real. The math was right. The thing it was measuring was a guess.
+Catching that, and building what I built instead, turned out to be a story about
+the one skill that actually matters when you work with AI: knowing which
+plausible-looking output to distrust. And the mess it left in my project, the
+backlog I still haven't cleaned up, is the correct cost of a game that's still
+telling me where its fun is.
+
+<Breakout kind="takeaway">
+The dangerous output of an AI collaborator isn't the wrong answer. It's the
+plausible one. My rigor wasn't in the prompt; it was in refusing to believe the
+meter until it could show me its receipt.
+</Breakout>
+
+## The meter that looked right
+
+Familiar is a TTRPG-inspired roguelike where you play the adventurer's familiar:
+you nudge a hero who already has their own plans. Influence actions can lower a
+check's difficulty, improve the odds, or change what the hero does outright, and
+those moments want their own voice, their own font, their own authored lines.
+Some of those lines exist already. (Hold onto that. This weekend's audit is how I
+learned the game has no way to show them yet.)
+
+That premise makes localization a first-class problem, not a ship-it-later
+afterthought. Text is dynamic on every axis at once: keys resolved at runtime,
+tokens substituted, fragments drawn at random, boxes instanced from prefabs,
+three font "voices" carrying who's speaking. On mobile, an overflowed button or a
+stray `TODO` string in a second language is a visible defect, not a nicety. I'd
+been careful about it from early on, no player-facing text in content JSON, every
+display string keyed to a table. Over a decade building games, some of it spent
+shoulder to shoulder with studios at SIE trying to get things shippable, teaches
+you that localization punishes the people who defer it.
+
+And I'd still call "I designed it right" an overstatement, because here's what the
+game actually looked like while I was busy finding the fun:
+
+<Carousel slides={[
+  { src: "/insights/localization/familiar-explanationscreen.png", alt: "A phone-framed intro screen in a paper-collage forest style: torn-parchment panels reading 'An adventurer requires a familiar. I require memories. Seems like a fair trade!', a ghost-chef familiar character, a 'GO TO SHOP' banner over an open book, and a tip: 'each familiar has a unique influence style. Try more than one with the same adventurer!'", caption: "The premise, in the game's own words: you're a familiar who trades memories to a hero for the privilege of nudging their quest. Note the tip, 'each familiar has a unique influence style', that influence system is where the localization gets hard." },
+  { src: "/insights/localization/mainmenu-familiar-v1.png", alt: "A phone-framed game screen in a paper-collage style: HP and RP stamps up top, a long scenario paragraph about a caravan camp that clips mid-sentence at 'she's half-', and an OBSERVE action card below with a difficulty timer.", caption: "Familiar right now: you're the familiar, reading a scene and choosing how to nudge the hero. Rough by choice, this is storyboard, not final art. Note the scenario text already clipping mid-word: 'she's half-'." },
+  { src: "/insights/localization/familiar-tactical-grid.png", alt: "A tactical combat grid on the same paper-collage phone screen, with the influence action AID: 'Grants advantage on Mira's next attack or save', a 30-cost timer, and PASS / GO buttons.", caption: "The influence system in play. AID, and its siblings, are how the familiar bends what the hero does. Every one of these wants its own voice and its own authored line." },
+  { src: "/insights/localization/familiar-interstitial-reactive.png", alt: "An interstitial screen reading 'UNSEEN. FOR NOW. Sharp eyes caught what {PC_FIRST_NAME} nearly missed.', with a large open-book graphic containing the literal text 'TODO: Flipbook animation sequence of encounter moments goes here', and a 'FIELD NOTES UPDATED!' banner.", caption: "Two failures shipping at once: a raw '{PC_FIRST_NAME}' token that never got substituted, and a 'TODO: Flipbook animation…' placeholder rendering to the player as if it were copy." },
+  { src: "/insights/localization/familiar-textoverflow-issues.png", alt: "An encounter outcome screen where the success narration has overflowed its box and collides directly on top of the heading 'MIRA — SUCCESS', the two layers of text overlapping into an unreadable smear.", caption: "And the one I opened the weekend chasing: outcome text overflowing its box so badly it renders on top of its own heading. This is failure mode number four, happening to a player, and I couldn't see it coming from my project files." },
+]} />
+
+So over a long weekend, in the gaps between family time, I set out to answer one
+small question: *are my strings the right length?* I asked for a fit-checker. The
+first character meter rendered, and it looked exactly like it worked.
+
+<Figure
+  src="/insights/localization/fillcap-ui.png"
+  alt="A single dashboard row: a fill bar reading 22 slash 10, and a red 'Overflow' badge beside it."
+  caption="My first fit meter: 22 characters into a 10-character box, flagged Overflow. It looked like proof. It was a guess wearing proof's clothing."
+/>
+
+## I asked where the mapping came from. Claude told me it guessed.
+
+I got the little hit of excitement, my first working meter, and then I asked the
+one question that unravels everything: how does it know *that* string lands in
+*that* box?
+
+It didn't. It had pattern-matched a plausible mapping and measured fit against it.
+The geometry was honest, the box really did hold about ten characters, but the
+claim that a given sentence lived in that box was invented. A fit check against a
+guessed mapping can be confidently, uselessly wrong: it might be measuring the
+right string against the wrong box entirely.
+
+<PullQuote>
+A meter that measures a guess isn't a measurement. It's a guess with a progress
+bar.
+</PullQuote>
+
+## Guessing harder doesn't work
+
+My first fix was the obvious one: ground the mapping in truth by having the AI
+trace the code. It built a strategy that assumed **static** localization keys, and
+that fell apart immediately, because my keys aren't static. They're assembled at
+runtime from tokens and content ids. Tracing source for a string that doesn't
+exist as a literal until the game builds it is a dead end.
+
+The reframe came when I noticed the fit bug had siblings. Hardcoded strings, an
+enum printed straight to a label with `.ToString()`, baked placeholder text in a
+prefab, were the *same disease*: text reaching the player without going through my
+localization system at all. I stopped chasing the one symptom and went looking for
+a root-cause solution to the whole class.
+
+<Breakout kind="lesson">
+You can't derive runtime truth from static source. Static tracing was doomed
+twice over here: the keys resolve at runtime, and the boxes are prefab-instanced,
+so a shop row or an item card doesn't even exist in the scene file to inspect.
+There was nothing to read.
+</Breakout>
+
+And the guess wasn't just unfounded, it was actively hiding things. The
+hand-authored binding had parked a whole family of strings in a box marked
+`SCROLL`, uncapped, `check skipped`. A box that never length-checks can't report
+an overflow, so dozens of them sat invisible behind it. Rigor applied too early,
+a mapping I wrote before the game could tell me the truth, was the very thing
+concealing the bug.
+
+<Figure
+  src="/insights/localization/early-dashboard-view.png"
+  alt="A dashboard panel showing a stat card labeled SCROLL, value 460, 'uncapped — check skipped', beside grouped string rows flagged 'Georgia → want Oswald' and 'Overflow'."
+  caption="The tell: a SCROLL box, uncapped, check skipped. The guessed binding parked strings in a box that never length-checks, so their overflows never surfaced. Note the 'Georgia → want Oswald' rows too: those are the influence lines, flagged wrong-voiced."
+/>
+
+## Stop reading the project. Read the running game.
+
+Here's the aha. There is exactly one instant when the key and the box are both in
+hand: the moment you assign the text. So I made that a single choke-point
+function and had it keep a receipt.
+
+The one canonical setter resolves the key, substitutes tokens, assigns the box,
+and, in the editor only, records `key → box → value` to a ledger with zero
+inference. That ledger, flushed out of the running game, becomes ground truth. It
+costs nothing in the shipped build; the instrumentation exists only where QA
+happens.
+
+<Insight sells="root-cause instrumentation">
+The move that generalizes past this game: when truth is impossible to infer
+everywhere, find the single point where it exists for free, and record it there.
+I didn't teach a tool to guess better. I found the one line of code that already
+knew the answer and asked it to write the answer down.
+</Insight>
+
+I built the ledger to accumulate across play sessions and clear only on purpose,
+because one playthrough never touches every scene. The commit history from that
+weekend is a run of fast checkpoints, not thrashing: I knew the shape I wanted.
+What I was building, under all the machinery, was one thing.
+
+<PullQuote cite="me, describing the whole system">
+Reconciliation between intent and actual.
+</PullQuote>
+
+## The ledger has its own blind spot
+
+Then the ledger tried to fool me the same way the meter had, and this time I saw
+it coming. By construction, a ledger only records text that went *through* the
+system. It is perfectly blind to exactly the leaks I cared about most: the baked
+prefab text, the `enum.ToString()`, the raw literal. A clean-looking ledger can
+still be missing every un-localized string in the game.
+
+So I built its complement: a census that walks every text box that actually
+rendered, localized or not. The set difference is the whole point.
+
+```
+census   = every box that displayed real copy   (what the player saw)
+ledger   = every box we localized on purpose     (what went through the system)
+
+census ∖ ledger = copy that rendered without being localized
+```
+
+The moment it earned its keep: my plot-resource grant text, the familiar
+overhearing a rumor, had no in-game home. The AI wanted to suppress the finding,
+there were *so many* of them, surely the check was miscalibrated. I stopped it. I
+threw a mockup dialogue into the scene just to see whether the ledger would catch
+it, and went to go live my weekend. I came back to find the placeholder title
+missing and no keys defined for any of the rumor types. The tool wasn't catching
+me being wrong. It was showing me, in real time, where the game wasn't built yet.
+
+<Figure
+  src="/insights/localization/grantdialog.png"
+  alt="A rough in-game modal on a flat green background: an illustrated familiar cradling a glowing sigil, a heading 'RESOURCE UNLOCKED!', and a rumor body about an old man at the fire, with 'Tap To Continue' in the corner."
+  caption="The throwaway modal I staged just to see if the ledger would catch it. The flat-green, Canva-export look is my storyboard stage, left in on purpose. What mattered wasn't the art. It was that this box, and the whole rumor family behind it, had no keys defined anywhere until the tool said so."
+/>
+
+<Breakout kind="principle">
+Don't turn the metric green. The AI's instinct when a check screams was to assume
+the check was broken and quiet it. The check was the only thing telling the truth.
+A tool's job is to refuse to let you hide the signal, even when hiding it would
+feel like progress.
+</Breakout>
+
+## One string vouches for a thousand
+
+Because those keys are tokenized and dynamic, showing a *single* rumor in-game
+proved the box for the *whole family*. The code already routes every string in a
+family to the same box regardless of content id, so I let the code assert the
+route and the ledger confirm, refute, or leave it unproven. Every mapping now
+carries its provenance: how do I actually know this?
+
+<StatRow>
+  <Stat value="104" label="runtime-verified (the game showed us)" />
+  <Stat value="508" label="code-truth assigned (routed, unverified)" />
+  <Stat value="64" label="rendered with no key (the real leaks)" />
+  <Stat value="290" label="not yet mapped (the honest backlog)" />
+</StatRow>
+
+These are the numbers as they stood at the end of the weekend, not a fresh
+capture. Re-running the tool now to make them prettier would betray the whole
+point: this got built in the margins of a real weekend, and the ledger reflects
+exactly where I left it.
+
+That's the ladder the whole weekend was climbing: a hand guess gets replaced by
+code-truth, which gets confirmed by observation. Guesses move up toward proof, and
+you can always see which rung a string is standing on.
+
+## The question I started with, finally answered
+
+With mappings that were finally true, I could do the small thing I set out to do
+on day one: find out which strings overflow. In the rumor family, almost all of
+them are at risk against the placeholder box I dropped in.
+
+<Figure
+  src="/insights/localization/dashboard-grantText.png"
+  alt="A dashboard table of grant-text strings, each showing character counts like 270 into 150 and a red Overflow badge, all routed to the same GrantDialog ResourceBodyText box."
+  caption="Every rumor line, routed to the same 150-character grant box, overflowing: 270, 229, 227, 222. The fit question I opened the weekend with, finally asked against a mapping I could trust."
+/>
+
+These overflows had been invisible the whole time, because the original hand guess
+had pointed the family at a scrolling box that never checks length. Fixing the
+*mapping* is what made the overflow findable. The measurement was never the hard
+part. Believing the measurement was.
+
+## A beautiful disaster, on purpose
+
+I could make every number on this dashboard go green tonight. Rewrite the prefab
+metadata to fix the font-voice warnings, migrate the hardcoded literals into the
+string tables, wire the unmapped strings to keys that mostly already exist. It's
+all mechanical now. I haven't, and that's the point.
+
+<Figure
+  src="/insights/localization/final-dashboard.png"
+  alt="A dashboard panel titled Localization Fit, a grid of stat cards: mostly amber counts for overflow, un-localized copy, voice warnings, and unmapped strings, with one green count for runtime-verified."
+  caption="Not a victory board. A single capture of the backlog, made legible. Every amber number is a decision I get to make later, not a bug hiding from me now."
+/>
+
+Some of the mess is here because I'm still tuning my voice rules, and I can only
+do that now that the tool shows me, procedurally, where they went wrong. Some of
+it is here because the moment I could see the whole content system clearly, I got
+curious about the next thing and wandered off to explore it. Rushing to clean it
+up would repeat the original mistake: freezing a contract, final copy, final
+voices, on a game that hasn't finished deciding what it is. The influence lines I
+mentioned at the top, the ones with nowhere to render yet? They stay flagged and
+visible until the game earns the shape that gives them a home. Not silenced.
+Scheduled.
+
+The instrument exists so I stay free to chase the fun, not so the dashboard turns
+green. The game is joyfully in prototype stage, and the dashboard reflects that
+honestly. If I'm being truthful, I'm more excited to polish and ship the Unity
+plugin this weekend produced than to turn every number green. Isn't that the
+point of letting curiosity take the wheel every so often?

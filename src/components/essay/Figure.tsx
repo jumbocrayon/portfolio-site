@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import ZoomableImage from "./ZoomableImage";
 
 /**
  * Figure — a single captioned image or diagram.
@@ -19,11 +20,10 @@ export default function Figure({
 }) {
   return (
     <figure className="my-8">
-      <img
+      <ZoomableImage
         src={src}
         alt={alt}
-        className="w-full rounded-2xl border border-line bg-surface"
-        loading="lazy"
+        className="mx-auto block max-h-[70vh] w-auto max-w-full rounded-2xl border border-line bg-surface"
       />
       {caption && (
         <figcaption className="mt-3 border-l-2 border-accent/40 pl-3 text-sm leading-relaxed text-content-muted">

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import ZoomableImage from "./ZoomableImage";
 
 /**
  * Carousel — a captioned screenshot sequence with text under each slide.
@@ -31,19 +32,21 @@ export default function Carousel({ slides }: { slides: Slide[] }) {
 
   return (
     <figure className="my-8">
-      <div className="relative overflow-hidden rounded-2xl border border-line bg-surface">
+      <div className="relative flex justify-center overflow-hidden rounded-2xl border border-line bg-surface">
         <AnimatePresence mode="wait">
-          <motion.img
+          <motion.div
             key={i}
-            src={slide.src}
-            alt={slide.alt}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="w-full"
-            loading="lazy"
-          />
+          >
+            <ZoomableImage
+              src={slide.src}
+              alt={slide.alt}
+              className="block max-h-[70vh] w-auto max-w-full"
+            />
+          </motion.div>
         </AnimatePresence>
 
         {count > 1 && (
