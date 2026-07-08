@@ -41,7 +41,6 @@ Skim the whimsy in 10s → get the character in a minute → fall all the way to
 
 ## Out of scope for v0
 - The comic-vignette engine (centerpiece) — placeholder slot only.
-- The dev blog system — stub the route only.
 - The kids' "let's tell a story" app — a separate prototype this site will eventually *feature*, not contain.
 - Auth, CMS, analytics dashboards (analytics matters strategically later as an inward diagnostic, but not in v0).
 
