@@ -71,24 +71,66 @@ don't assert*, and that applies hardest to character.
   stance a sentence takes, or the way the page behaves. A page that simply
   *behaves* clever and kind needs no line claiming it.
 - When tempted to summarize the character at the end of a page, **cut the line
-  instead.** Ending on the work, in silence, reads as confidence. (This is why
-  the About page deliberately ends on its last engagement card with no wrap-up.)
+  instead.** Ending on the work, in silence, reads as confidence. (Both the home
+  About page and the `/how-i-play` services page do this: the home closes by
+  bridging softly to the Workbench, not by naming who Jess is; the services page
+  ends on its last engagement card with no wrap-up.)
 - The credibility version of this is the "one quiet anchor" rule below: show one
   earned proof, don't recite a résumé.
 
 ## Credibility: the "one quiet anchor" rule
 Decided for this site: the shell stays whimsy-forward, with **one understated
-credibility signal** near the top (e.g. the console-launch nod in the Workbench
-hook) so a casual visitor registers "senior operator" without reading a résumé.
+credibility signal** near the top (e.g. the console-launch nod in a page hook)
+so a casual visitor registers "senior operator" without reading a résumé.
 Hard credentials (PlayStation, PS5, the patent, scale numbers) live in the
-**depth layers and About**, where the work earns them. Don't lead a hook with a
-job title or a metric.
+**depth layers**, where the work earns them. **Don't lead a hook with a job
+title or a metric** — the hook stays a hook.
+
+**The home (About) page is the exception that proves the rule.** It is the
+credibility/story layer, so it carries the anchors — but they are *reached by
+scrolling past the story*, never front-loaded into the hook. The hook is still
+just name + role line + the `AI enthusiast*` motif; the metric-bearing highlight
+cards live below, met by choice. Same principle: numbers are earned by the
+visitor's descent, not thrown at the casual reader.
 
 ## Signature phrase
 **"Curious content."** This is Jess's own phrasing for the work she curates, and
 it's the preferred frame over "experiments in public" or anything mad-scientist.
 Use it as the role/tagline anchor and reach for it when describing what the site
 is about. It carries the whole thesis (applied curiosity + craft) in two words.
+
+## The through-line: applied systems-thinking, curiosity-led imagination
+
+Underneath the whimsy, every page is arguing one philosophy, compressed into the
+home page's tagline: **applied systems-thinking, curiosity-led imagination.**
+Curiosity picks the direction; disciplined systems-thinking makes it real and
+keeps it honest. The two are never at odds — the rigor is what lets the play
+mean something.
+
+The value claim this philosophy makes is about **discipline as the premium**: in
+a moment when almost anything is easy to build, the scarce thing is building
+something imaginative that doesn't oversell what it can actually do. Copy can
+lean on this argument when it needs to name the value, because it's a claim about
+the *market and the method*, not a claim about Jess's character (which still
+follows the show-don't-tell rule). The turn always lands on **empowering the
+human doing the creative work**, never on replacing them.
+
+Guardrails:
+- **Show the discipline, don't recite it.** Don't stack self-labels ("careful,"
+  "disciplined," "rigorous," "thoughtful") — that's the name-the-trait failure
+  the show-don't-tell rule guards against. Let the specifics and the work carry
+  it; the tagline is the one compressed statement, and it earns its place because
+  it's a method, not an adjective about the person.
+- **Keep agency on the visitor.** Depth is reached by choice; the home page
+  closes on "go as deep as you're curious to." Don't do the frame *to* the
+  reader.
+- **Curiosity and rigor together, never one without the other.** A playful line
+  with no method behind it is decoration; a rigorous line with no curiosity is
+  joyless. Same both-at-once balance as compassionate-not-soft.
+- **Name specific tools sparingly.** The philosophy is about judgment and craft,
+  not any one technology. When a specific tool (AI included) is the subject, it's
+  the occasion for the thinking, not the point of it — that framing lives on
+  its own `/how-i-play` engagement card, not spread across the shell.
 
 ## Punctuation: em-dash discipline
 Em dashes (—) were overused in the first pass and read as a tic. **Budget: rare.**

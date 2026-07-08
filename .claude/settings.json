@@ -40,7 +40,11 @@
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --force-color-profile=srgb --window-size=1200,1600 --screenshot=/private/tmp/claude-501/-Users-jessloeb-Development-Personal-portfolio/07b7d407-1610-41df-a84d-5723a37b8324/scratchpad/site-light.png http://localhost:4319/)",
       "Bash('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome' --headless --disable-gpu --hide-scrollbars --force-color-profile=srgb --force-dark-mode --window-size=1200,1600 --screenshot=/private/tmp/claude-501/-Users-jessloeb-Development-Personal-portfolio/07b7d407-1610-41df-a84d-5723a37b8324/scratchpad/site-dark-raw.png http://localhost:4319/)",
       "Bash(pkill -f \"vite preview\")",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5174/)"
     ]
   },
   "hooks": {

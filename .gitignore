@@ -15,6 +15,7 @@ node_modules
 dist
 dist-ssr
 *.local
+*.tsbuildinfo
 
 # Editor / OS
 .DS_Store
@@ -34,3 +35,6 @@ dist-ssr
 .env
 .env.*
 !.env.example
+
+# Local-only source material (CV has personal contact info; keep out of public repo)
+resources/

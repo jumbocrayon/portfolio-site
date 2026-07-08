@@ -21,13 +21,15 @@ export default function Workbench() {
           Jess Loeb
         </h1>
         <p className="mt-3 font-display text-lg font-medium text-accent">
-          Curious content, built in the open.
+          Where I test the ideas in the open.
         </p>
         <p className="mt-5 text-lg text-content-muted">
-          More like a workbench than a résumé. I bring the instincts I used to ship a
-          console launch to ideas about interactive media, technology patterns, and development processes
-          and showcase thoughts, demos and analysis along the way. Some pieces are finished, some still have
-          their working notes left in. Start light, let your curiosity guide you.
+          This is the workbench: interactive media, technology patterns, and
+          development processes, with the thinking and analysis left in
+          alongside the demos. I bring the instincts I used to ship a console
+          launch to ideas that are still being figured out. Some pieces are
+          finished, some still have their working notes in. Follow whatever
+          you're curious about.
         </p>
       </motion.header>
 

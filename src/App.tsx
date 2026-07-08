@@ -8,8 +8,9 @@ import ThemeToggle from "@/components/ThemeToggle";
  * the whole site is alive and evolving.
  */
 const NAV = [
-  { to: "/", label: "Workbench", end: true },
-  { to: "/about", label: "How I play", end: false },
+  { to: "/", label: "About", end: true },
+  { to: "/workbench", label: "Workbench", end: false },
+  { to: "/how-i-play", label: "How I play", end: false },
   { to: "/dev-blog", label: "Dev blog", end: false },
 ];
 
