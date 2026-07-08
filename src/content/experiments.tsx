@@ -24,7 +24,7 @@ export const experiments: Experiment[] = [
       howItWorks:
         "A told moment is parsed into a beat, a cast, and a camera. The art direction stays human-defined (my hand sets the style); the AI fills the in-betweens in real time against those constraints. It originates as a Familiar feature, where a playthrough's story becomes a shareable vignette.",
       systems:
-        "The interesting problem isn't the model, it's the guardrails: how do you let AI animate freely while keeping a consistent, human-authored style? The answer is a constraint layer that treats art direction as a first-class input, not a post-hoc filter. The same build wears three hats: feature, demo, and dev-blog content.",
+        "The interesting problem isn't the model, it's the guardrails: how do you let AI animate freely while keeping a consistent, human-authored style? The answer is a constraint layer that treats art direction as a first-class input, not a post-hoc filter. The same build wears three hats: feature, demo, and an Insights episode.",
     },
     // No demo yet — renders the centerpiece "coming alive" placeholder.
   },

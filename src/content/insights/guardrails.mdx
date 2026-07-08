@@ -1,0 +1,44 @@
+---
+slug: guardrails
+title: "Guardrails, not gates"
+hook: "The hard part of AI animation isn't the model. It's keeping a human's hand on the style while the machine fills the in-betweens."
+tags: ["devblog", "real-time AI", "art × science"]
+publishedAt: "2026-06-18"
+draft: true
+---
+
+{/* INVALID DRAFT — generated without Jess's call/response. Do not publish.
+    Re-author via the /insight skill so the argument and evidence are hers. */}
+
+Familiar's comic-vignette engine turns a single told moment into a shareable
+animated comic. The obvious way to build that is to hand the whole frame to a
+model and hope the style holds. It doesn't. Twelve frames in, the character's
+face has drifted, the linework has smoothed out, and the thing that made it feel
+authored is gone.
+
+So the constraint layer came first, before any generation. Art direction is a
+first-class input: the palette, the line weight, the way a face is allowed to
+deform. The AI animates freely, but only inside that box.
+
+<PullQuote>
+Guardrails, not gates. A gate stops you. A guardrail keeps you on the road while
+you drive fast.
+</PullQuote>
+
+This is the same instinct I brought to platform work at scale. You don't make a
+system safe by forbidding the interesting cases. You make the safe path the easy
+one, then let people move quickly inside it. The style stays human-defined
+because the human defined the *space*, not because the human approved every
+frame.
+
+<Insight sells="constraint design">
+The interesting problem was never the model's raw capability. It was designing
+the box: which parts of the art direction are load-bearing and must be locked,
+and which can be handed to the machine to improvise inside. That's a systems call,
+and it's the difference between a tool that feels authored and one that feels
+generated.
+</Insight>
+
+The episode this build produced wears three hats: a Familiar feature, the
+centerpiece demo on the Workbench, and this writing. One build, told from three
+angles. That's the point of leaving the working notes in.

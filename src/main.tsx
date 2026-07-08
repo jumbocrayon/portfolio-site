@@ -11,7 +11,8 @@ import About from "@/pages/About";
 import Workbench from "@/pages/Workbench";
 import ExperimentPage from "@/pages/ExperimentPage";
 import HowIPlay from "@/pages/HowIPlay";
-import DevBlog from "@/pages/DevBlog";
+import Insights from "@/pages/Insights";
+import InsightPage from "@/pages/InsightPage";
 import NotFound from "@/pages/NotFound";
 
 const router = createBrowserRouter([
@@ -25,8 +26,11 @@ const router = createBrowserRouter([
       { path: "workbench", element: <Workbench /> },
       { path: "experiment/:slug", element: <ExperimentPage /> },
       { path: "how-i-play", element: <HowIPlay /> },
-      { path: "dev-blog", element: <DevBlog /> }, // stub only
-      // Legacy path: About used to live here. Keep links working.
+      // Insights: the writing collection. "devblog" is one tag within it.
+      { path: "insights", element: <Insights /> },
+      { path: "insights/:slug", element: <InsightPage /> },
+      // Legacy paths. Keep old links working.
+      { path: "dev-blog", element: <Navigate to="/insights" replace /> },
       { path: "about", element: <Navigate to="/" replace /> },
       { path: "*", element: <NotFound /> },
     ],

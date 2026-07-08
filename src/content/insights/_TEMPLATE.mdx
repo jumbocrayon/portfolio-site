@@ -1,0 +1,83 @@
+---
+slug: _template
+title: "Essay template — every block, in place"
+hook: "A working reference for the Insights format. Copy this file, keep the shape, replace the words."
+tags: ["reference"]
+publishedAt: "2099-01-01"
+draft: true
+---
+
+Open with the **big idea**, stated plainly, in one or two sentences. Not a
+warm-up — the provocative claim itself, up front, so a skimmer gets the argument
+in the first breath. Everything below is evidence for this line.
+
+Then a paragraph of context: why this question, why now, what changed that makes
+it worth an essay. Keep the surface light and inviting; the depth is reached by
+the reader's own choice as they descend.
+
+<Breakout kind="takeaway">
+The single sentence you'd want a reader to leave with, even if they read nothing
+else. Use `kind="takeaway"` for the one-thing-if-you-take-nothing-else box.
+</Breakout>
+
+## A section heading names a move, not a topic
+
+Sections carry the argument in steps. Start each with a claim, then earn it.
+Prose is the default; the block components are for the moments that want to sit
+at a different altitude than the flow.
+
+Use a **pull-quote** when a line is doing real load-bearing work — the thesis, or
+a sharp beat worth remembering. Sparingly:
+
+<PullQuote cite="optional attribution">
+The line that carries the argument, or the one you'd want quoted back to you.
+</PullQuote>
+
+When a passage proves something about *how you work*, name it — but let the reader
+infer the character from the specific thing, never claim the trait:
+
+<Insight sells="systems judgment">
+What this passage demonstrates about the value you bring. Point at the specific
+decision or instinct on display. This is the block that sells the work for you,
+so it should reference a real thing you did, not an adjective about yourself.
+</Insight>
+
+## Show the evidence, including the unflattering counts
+
+A row of earned numbers reads as confidence when the honest ones are in it too:
+
+<StatRow>
+  <Stat value="24M+" label="players, zero downtime" />
+  <Stat value="1" label="U.S. patent" />
+  <Stat value="0" label="claims not grounded in data" />
+  <Stat value="∞" label="times taste beat the generic" />
+</StatRow>
+
+A single captioned figure, where the caption does the work of naming the evidence:
+
+<Figure
+  src="/insights/_template/example.png"
+  alt="Describe the image the way it would be read aloud — same voice rules as copy."
+  caption="Captions are load-bearing: name what the reader is looking at and why it matters, don't just label it."
+/>
+
+A carousel walks a reader through a progression, one still at a time, with the
+story living in the per-slide caption:
+
+<Carousel slides={[
+  { src: "/insights/_template/1.png", alt: "First state.", caption: "Where it started." },
+  { src: "/insights/_template/2.png", alt: "Second state.", caption: "What changed, and why it mattered." },
+  { src: "/insights/_template/3.png", alt: "Third state.", caption: "The result, stated plainly." },
+]} />
+
+## Land the argument, don't summarize it
+
+Close on the work, or on the sharpest restatement of the big idea — not a wrap-up
+that lists what you just said, and never a line naming your own character. Ending
+in the specifics reads as confidence.
+
+<Breakout kind="principle">
+If the essay forced a durable rule or principle, state it here as the thing you'd
+hand someone else. `kind="principle"` for "the principle this forced,"
+`kind="lesson"` for "the lesson under everything."
+</Breakout>

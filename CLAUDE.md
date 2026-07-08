@@ -11,6 +11,9 @@ A personal portfolio website that is **more than a résumé** — it's a "living
 - `scaffolding/02-SCAFFOLDING-SPEC.md` — stack, information architecture, core abstractions, v0 acceptance criteria, first tasks
 - `scaffolding/03-VOICE-GUIDELINES.md` — **read before writing or revising ANY visitor-facing copy.** The playful-precise register, diction do/don't list, the "one quiet anchor" credibility rule, and a 5-question self-check. A PostToolUse hook surfaces the check whenever copy files are edited.
 
+## Human-in-the-loop rule for longform content (non-negotiable)
+**No longform Insights essay may be authored, drafted, or scaffolded without Jess in the loop.** Longform content = anything in `src/content/insights/*.mdx` (the `_TEMPLATE.mdx` reference is the only exception). This is enforced by the `/insight` skill's staged call-and-response: Stage 1 (big idea) must come from *her* answers, Stage 2 (evidence hunt) must run against seed material *she* points at. Never generate an essay from stub information or infer the argument on her behalf. The rule the whole site argues — show, don't tell; the specifics do the selling — only holds if the specifics are really hers. An essay produced without her call/response is invalid and must be marked `draft: true` with a note that it needs the interview, not shipped.
+
 ## The thesis the whole site argues
 "Applied curiosity + caring about how creative groups use available resources = art meets science in unimaginably cool places, and I curate those spaces. I set technical foundations where curiosity and magic can later happen."
 
