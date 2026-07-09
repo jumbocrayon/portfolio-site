@@ -16,10 +16,12 @@
     <script>
       (function () {
         try {
+          // A saved choice wins; otherwise respect the OS, defaulting to dark
+          // when no preference is expressed.
           var saved = localStorage.getItem("theme");
           var theme =
             saved ||
-            (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+            (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
           document.documentElement.setAttribute("data-theme", theme);
         } catch (e) {}
       })();
