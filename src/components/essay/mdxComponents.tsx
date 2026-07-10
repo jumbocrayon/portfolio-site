@@ -5,6 +5,7 @@ import Insight from "./Insight";
 import { StatRow, Stat } from "./StatRow";
 import Figure from "./Figure";
 import Carousel from "./Carousel";
+import Conviction from "./Conviction";
 
 /**
  * The MDX component map.
@@ -25,6 +26,7 @@ export const mdxComponents = {
   Stat,
   Figure,
   Carousel,
+  Conviction,
 
   // Section headings. Essays start their sections at h2 (the h1 is the title,
   // rendered by the template outside the MDX body).

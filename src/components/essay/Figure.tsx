@@ -13,16 +13,24 @@ export default function Figure({
   src,
   alt,
   caption,
+  portrait,
 }: {
   src: string;
   alt: string;
   caption?: ReactNode;
+  /**
+   * Tall, narrow images (phone screenshots) render in a centered, width-capped
+   * column so the image and its caption read as one block instead of a skinny
+   * image beside a full-width caption.
+   */
+  portrait?: boolean;
 }) {
   return (
     <figure className="my-8">
       <ZoomableImage
         src={src}
         alt={alt}
+        wrapperClassName={portrait ? "mx-auto w-full max-w-xs sm:max-w-sm" : ""}
         className="mx-auto block max-h-[70vh] w-auto max-w-full rounded-2xl border border-line bg-surface"
       />
       {caption && (

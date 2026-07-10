@@ -58,6 +58,11 @@
   --color-purple-hover: #4c2980;  /* purple pressed/hover (darker) */
   --color-purple-light-hover: #c4b0e8; /* purple-light hover on dark */
 
+  /* Conviction — a second saturated hue, reserved for the rare strongly-held
+     line. Used sparingly (see <Conviction>), never as general accent. */
+  --color-rose: #b02b5e;          /* conviction on LIGHT surfaces (5.9:1 on page) */
+  --color-rose-light: #f2a0c0;    /* conviction on DARK surfaces (7.5:1 on page)  */
+
   /* Type — display carries personality, body stays a quiet workhorse */
   --font-display: "Hanken Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -78,6 +83,7 @@
   --accent: var(--color-purple);         /* nav indicators, anchors, headers */
   --accent-hover: var(--color-purple-hover);
   --accent-contrast: #ffffff;            /* text on an accent fill */
+  --conviction: var(--color-rose);       /* the rare strongly-held line */
   /* 28%, not 22%: the pale blue sits closer to the page than the old green did,
      so the card edge leans on the border rather than the fill to read. */
   --border: color-mix(in srgb, var(--color-blue-deep) 28%, transparent);
@@ -98,6 +104,7 @@
   --accent: var(--color-purple-light);   /* purple is too dark on dark: use light */
   --accent-hover: var(--color-purple-light-hover);
   --accent-contrast: var(--color-neutral-dark);
+  --conviction: var(--color-rose-light); /* rose is too dark on dark: use light */
   --border: color-mix(in srgb, var(--color-blue-pale) 20%, transparent);
 
   --status-live: #6fce8a;
@@ -116,6 +123,7 @@
   --color-accent: var(--accent);
   --color-accent-hover: var(--accent-hover);
   --color-accent-contrast: var(--accent-contrast);
+  --color-conviction: var(--conviction);
   --color-line: var(--border);
   --color-status-live: var(--status-live);
   --color-status-progress: var(--status-progress);

@@ -16,10 +16,12 @@ export default function ZoomableImage({
   src,
   alt,
   className = "",
+  wrapperClassName = "",
 }: {
   src: string;
   alt: string;
   className?: string;
+  wrapperClassName?: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -44,7 +46,7 @@ export default function ZoomableImage({
         type="button"
         onClick={() => setOpen(true)}
         aria-label={`Open full-size: ${alt}`}
-        className="group relative block cursor-zoom-in appearance-none border-0 bg-transparent p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        className={`group relative block cursor-zoom-in appearance-none border-0 bg-transparent p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent ${wrapperClassName}`}
       >
         <img src={src} alt={alt} className={className} loading="lazy" />
         <span className="pointer-events-none absolute bottom-2 right-2 rounded-full border border-line bg-page/80 px-2 py-1 font-display text-xs text-content-muted opacity-0 backdrop-blur-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
