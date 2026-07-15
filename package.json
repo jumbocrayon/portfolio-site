@@ -21,6 +21,8 @@
   },
   "homepage": "https://github.com/jumbocrayon/portfolio-site#readme",
   "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "motion": "^11.15.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

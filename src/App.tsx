@@ -1,4 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 /**
@@ -63,6 +65,9 @@ export default function App() {
           built in public — this site is alive and evolving
         </span>
       </footer>
+
+      <Analytics />
+      <SpeedInsights />
     </div>
   );
 }
