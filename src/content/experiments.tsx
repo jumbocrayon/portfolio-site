@@ -1,5 +1,6 @@
 import type { Experiment } from "./experiment";
 import TryItBox from "@/demos/TryItBox";
+import FamiliarCarousel from "@/demos/FamiliarCarousel";
 
 /**
  * The seeded Workbench.
@@ -27,6 +28,25 @@ export const experiments: Experiment[] = [
         "The interesting problem isn't the model, it's the guardrails: how do you let AI animate freely while keeping a consistent, human-authored style? The answer is a constraint layer that treats art direction as a first-class input, not a post-hoc filter. The same build wears three hats: feature, demo, and an Insights episode.",
     },
     // No demo yet — renders the centerpiece "coming alive" placeholder.
+  },
+  {
+    slug: "familiar",
+    title: "Familiar",
+    hook: "You're not the hero. You're the animal at their side, and the only power you have is knowing them well enough to nudge.",
+    status: "in-progress",
+    tags: ["game design", "systems design", "tactical RPG", "content pipeline", "iOS"],
+    updatedAt: "2026-07-01",
+    shareableArtifact: "A mobile game about building a relationship during scattered moments of someone else's quest",
+    depth: {
+      whatItIs:
+        "A tactical RPG for iOS where you play the familiar, not the adventurer. You can't speak, cast, or swing a sword. You can only influence the person you're bonding with, and only as well as you actually know them. Bond deepens from Stranger to Familiar across a run; the closer you get, the more power you have to influence their choices.",
+      howItWorks:
+        "Every run is one relationship. A party of three is generated fresh; you pick a familiar and a person to follow. Encounters alternate tactical grid combat and narrative skill checks round by round, and your influence actions (Embolden, Soothe, Observe, Distract, Aid, Undercut) shift the odds rather than dictate the outcome. Familiarity is a single 0–100 scale that gates everything: hidden stats reveal one at a time as you cross thresholds, and unlocking the ability to redirect a choice comes with trust.",
+      systems:
+        "The challenge is making a relative lack of narrative agency fun for the player. The adventurer chooses what to do and when to do it, not the player! That meant one honest constraint everywhere: information and agency are both gated behind the bond. The content is data, not code: JSON packs loaded at runtime into plain C# objects, each type guarded by its own validator, with player-facing text kept out of the content entirely and routed through a localization ledger. It began as an overengineered content pipeline, a love letter to the challenges that always made me shake my head (and sometimes my fist) while working on mobile games professionally.",
+    },
+    // A screenshot reel stands in until a live playable slice is ready.
+    demo: FamiliarCarousel,
   },
   {
     slug: "pre-mortem-worksheet",
