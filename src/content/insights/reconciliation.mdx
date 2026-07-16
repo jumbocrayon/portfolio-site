@@ -82,7 +82,7 @@ guessed mapping can be confidently, uselessly wrong: it might be measuring the
 right string against the wrong box entirely.
 
 <PullQuote>
-A meter that measures a guess isn't a measurement- it's a goose chase.
+A meter that measures a guess isn't a measurement. It's a goose chase.
 </PullQuote>
 
 ## Guessing smarter doesn't work
@@ -118,10 +118,10 @@ There was nothing to read.
 
 And the guess wasn't just unfounded, it was actively hiding things. The first few
 passes were very messy. Following the localization keys to the logical place in-game 
-also failed; I had inadvertantly allowed my team to define strings that served the 
+also failed; I had inadvertently allowed my team to define strings that served the 
 same purpose. My UI localization file had different copy explaining the influence 
 actions available to the player than the per-familiar flavored explanations (when I 
-built the content pipeline, I figured a wolf would observe differently than an owl - 
+built the content pipeline, I figured a wolf would observe differently than an owl, 
 smelling things versus a birds eye view). Putting the content pipeline before the game was 
 right for this kind of exploratory project, but obviously pipeline engineers disagree 
 with UI/UX developers all the time. I just happened to be both and also neither.
@@ -155,7 +155,7 @@ knew the answer and promoted it to accountant.
 I built the ledger to accumulate across play sessions and clear on demand,
 because one playthrough rarely touches every scene. The commit history from that
 weekend is a run of fast checkpoints, not thrashing: I knew the shape I wanted.
-I was building a cohesive strategy to enforce my "localization as a first-class citizen" principple.
+I was building a cohesive strategy to enforce my "localization as a first-class citizen" principle.
 
 Then I put it where I'd trip over it. The ledger lives in the Unity editor where I playtest, 
 and every time I play the game or spot-check a feature,the receipt is right there.
@@ -267,8 +267,8 @@ I could make every number on this dashboard go green tonight. Rewrite the prefab
 metadata to fix the font-voice warnings, migrate the hardcoded literals into the
 string tables, wire the unmapped strings to keys that mostly already exist. It's
 all mechanical but I haven't, and that's the whole crux of why I chose a dashboard at all. 
-This is very much a prototype that needs time to breathe and no amount of AI-assisted power 
-up to development speed will tell me which of these numbers should be green, and which 
+This is very much a prototype that needs time to breathe and no amount of AI-assisted 
+speed will tell me which of these numbers should be green, and which 
 aren't worth chasing at all because that's kind of the fun part anyway. Building a 
 dashboard to set burndown goals is tempting in a lot of ways, but at this stage I 
 want to build dashboards to make sure I have the data to support my decisions.
@@ -289,11 +289,19 @@ on a game that hasn't finished deciding what it is. The rumor lines the census c
 the ones with nowhere to render yet? Deleted on purpose, not silenced.
 
 The instrument exists so I stay free to chase the fun, not just so the dashboard turns
-green (yet). If I wanted them all to be green, I would have built skills, robust editor tools and tests.
-This game is joyfully in prototype stage, and the dashboard reflects that
-honestly. It left me excited to chase my curiosity, and I want to explore whether to ship a Unity
-plugin with polished, deterministic versions of these techniques to help devs course-correct after things invevitably get messy. 
-<Conviction>Giving players content in their native language should be possible no matter how far into a project you are when you choose to pursue it.</Conviction>
+green (yet). Since the weekend in question, I've been able to make a lot of fast decisions. I've completely overhauled the UI/narrative flow, weighed 
+the pros and cons of switching engines entirely via AI-driven analysis, and found (and fixed) a handful more 
+edge-cases that my reconciliation layer wasn't handling properly. The core strategy has proven itself out, and 
+it's something solodev and indies can introduce no matter where they are in the development cycle.
+<Conviction>Choosing to make localization a first-class constraint isn't possible for everyone, but a 
+path to giving players content in their native language should be.</Conviction> 
 
+<Figure
+  src="/insights/localization/familiar-updatedsceneintro.png"
+  alt="A screenshot of the games updated scene intro narrative UI, a placeholder image of two hounds in the woods with accompanying text, all fitting on one screen."
+  caption="Some red badges (font mismatch) are a mechanical fix: a validator at CI. Most aren't. This scene overflowed, and the fix wasn't shorter copy, it was putting my UI/UX hat back on and rebuilding the layout so the whole beat fits one screen."
+/>
 
-Isn't it fun what you learn when you let curiosity take the wheel every so often?
+I hope this inspires someone to do more creating with genAI. These tools have amazing potential to help 
+people express and build on a schedule that matches their decision-making capacity, and if anything this 
+has shown me that experience doing things the hard way is still valuable, albeit in a different capacity. 
