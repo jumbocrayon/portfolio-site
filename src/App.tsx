@@ -1,7 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-import ThemeToggle from "@/components/ThemeToggle";
 
 /**
  * The site shell: a calm, professional frame around every page.
@@ -27,28 +26,25 @@ export default function App() {
           >
             Jess Loeb
           </NavLink>
-          <div className="flex items-center gap-1 sm:gap-2">
-            <ul className="flex flex-wrap items-center gap-1">
-              {NAV.map((item) => (
-                <li key={item.to}>
-                  <NavLink
-                    to={item.to}
-                    end={item.end}
-                    className={({ isActive }) =>
-                      `relative rounded-md px-3 py-1.5 font-display text-sm font-medium transition-colors ${
-                        isActive
-                          ? "text-accent after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-accent"
-                          : "text-content-muted hover:text-content"
-                      }`
-                    }
-                  >
-                    {item.label}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
-            <ThemeToggle />
-          </div>
+          <ul className="flex flex-wrap items-center gap-1">
+            {NAV.map((item) => (
+              <li key={item.to}>
+                <NavLink
+                  to={item.to}
+                  end={item.end}
+                  className={({ isActive }) =>
+                    `relative rounded-md px-3 py-1.5 font-display text-sm font-medium transition-colors ${
+                      isActive
+                        ? "text-accent after:absolute after:inset-x-3 after:-bottom-0.5 after:h-0.5 after:rounded-full after:bg-accent"
+                        : "text-content-muted hover:text-content"
+                    }`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
         </nav>
       </header>
 

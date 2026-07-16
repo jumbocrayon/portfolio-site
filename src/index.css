@@ -70,46 +70,26 @@
 
 /*
   ---- Semantic tokens ----
-  Light mode is the default (:root). Dark mode overrides on [data-theme="dark"].
-  Tailwind utilities below reference these, so bg-page / text-accent just work.
+  The site is dark-mode only. Tailwind utilities below reference these tokens,
+  so bg-page / text-accent just work.
 */
 :root {
-  --bg: var(--color-neutral-light);      /* page background */
-  --surface: var(--color-blue-pale);     /* cards / panels */
-  --surface-strong: var(--color-blue-deep); /* inverted / hero blocks */
-  --text: var(--color-neutral-dark);     /* primary text */
-  --text-muted: var(--color-blue-muted); /* secondary text */
-  --text-on-strong: var(--color-blue-pale); /* text on surface-strong */
-  --accent: var(--color-purple);         /* nav indicators, anchors, headers */
-  --accent-hover: var(--color-purple-hover);
-  --accent-contrast: #ffffff;            /* text on an accent fill */
-  --conviction: var(--color-rose);       /* the rare strongly-held line */
-  /* 28%, not 22%: the pale blue sits closer to the page than the old green did,
-     so the card edge leans on the border rather than the fill to read. */
-  --border: color-mix(in srgb, var(--color-blue-deep) 28%, transparent);
-
-  /* Build-in-public status colors — flip per theme so each stays legible */
-  --status-live: #276b39;    /* green — running */
-  --status-progress: #7d500e;/* amber — in progress */
-  --status-spark: var(--color-purple); /* purple — spark test */
-}
-
-[data-theme="dark"] {
-  --bg: var(--color-neutral-dark);
-  --surface: var(--color-blue-surface);
-  --surface-strong: var(--color-blue-pale);
-  --text: var(--color-blue-pale);
-  --text-muted: var(--color-blue-muted-dark);
-  --text-on-strong: var(--color-neutral-dark);
-  --accent: var(--color-purple-light);   /* purple is too dark on dark: use light */
+  --bg: var(--color-neutral-dark);          /* page background */
+  --surface: var(--color-blue-surface);     /* cards / panels */
+  --surface-strong: var(--color-blue-pale); /* inverted / hero blocks */
+  --text: var(--color-blue-pale);           /* primary text */
+  --text-muted: var(--color-blue-muted-dark); /* secondary text */
+  --text-on-strong: var(--color-neutral-dark); /* text on surface-strong */
+  --accent: var(--color-purple-light);      /* nav indicators, anchors, headers */
   --accent-hover: var(--color-purple-light-hover);
-  --accent-contrast: var(--color-neutral-dark);
-  --conviction: var(--color-rose-light); /* rose is too dark on dark: use light */
+  --accent-contrast: var(--color-neutral-dark); /* text on an accent fill */
+  --conviction: var(--color-rose-light);    /* the rare strongly-held line */
   --border: color-mix(in srgb, var(--color-blue-pale) 20%, transparent);
 
-  --status-live: #6fce8a;
-  --status-progress: #e0aa4e;
-  --status-spark: var(--color-purple-light);
+  /* Build-in-public status colors */
+  --status-live: #6fce8a;    /* green — running */
+  --status-progress: #e0aa4e;/* amber — in progress */
+  --status-spark: var(--color-purple-light); /* purple — spark test */
 }
 
 /* Expose semantic tokens as Tailwind color utilities (bg-page, text-accent, …) */
