@@ -2,8 +2,7 @@
   "name": "living-testbed-portfolio",
   "private": true,
   "version": "0.0.0",
-  "description": "A personal portfolio that is more than a résumé — a living testbed of interactive-media experiments.",
-  "type": "module",
+  "description": "More workbench than portfolio — a collection of insights, in-flight ideas and experiments.",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
