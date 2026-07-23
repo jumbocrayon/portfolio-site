@@ -1,6 +1,6 @@
 ---
 slug: reconciliation
-title: "How do you know that string goes in that box?"
+title: "Sneaky Strings: A Cautionary Tale in AI Powered Prototyping"
 hook: "Not an unhinged AI stunt. Just a parent, a narrative game prototype, and a weekend spent turning \"will my text fit on the phone?\" into a localization backlog made legible, where every problem is a decision I get to make, not a bug hiding from me."
 tags: ["localization", "unity", "genAI", "solodev", "devblog"]
 publishedAt: "2026-07-08"
@@ -9,7 +9,7 @@ draft: false
 
 I've been building a game in the margins of my life: a TTRPG-inspired
 roguelike coded entirely with genAI in spare hours, around my kids, on a schedule that
-actually works for me. <Conviction>That working style, exploration at my own pace in the margins of a life, is the whole point of the project</Conviction>, and it's 
+actually works for me. <Conviction>That working style, exploration at my own pace in the margins of a life, has been the whole point of the project</Conviction>, and it's 
 how this weekend happened too.
 
 Going in, I had a tool I mostly liked: a content dashboard for editing the data for the game's
@@ -23,8 +23,8 @@ I thought would be one small thing: replace the guess with the truth.
   caption="A run simulation dashboard that doubles as an editor. Every string carries a character count, and not one of them knows what box it lands in. 257 characters is fine or fatal depending entirely on a fact this screen does not have."
 />
 
-That gap (a number that doesn't know whether it's green, yellow or red) is the whole story. Chasing it
-turned into a lesson about a highest-leverage skill no LLM can replace: knowing which plausible-looking output to distrust.
+That gap (a number that doesn't know whether it's green, yellow or red) is how this whole investigation started. Chasing it
+turned into a reminder that LLMs can't replace judgement, taste, and out-of-the-box thinking. 
 
 ## Why a game about a familiar makes text hard
 
@@ -40,28 +40,27 @@ font, authored line...
   caption="The premise, in the game's own words: you're a familiar who trades memories to a hero for the privilege of nudging their quest. That tip, 'each familiar has a unique influence style', is exactly where the localization gets hard: a wolf and an owl should not sound the same."
 />
 
-Here's the part that makes the mess make sense: I built the content authoring pipeline
-*before* the game that consumes it. That was the right call for this exploratory project,
-which started as a genAI learning project leveraging my TTRPG GM knowledge meeting a desire to 
-explore storytelling through inverted control. That said, it guarantees a certain
-kind of challenge later: strings written for attempts I abandoned, half-built ideas
-(in this case, both artifacts surfacing as copy that never found an in-game home). 
+This is a personal passion project largely directed by things I've been burned by before from 
+my career in gaming. So naturally I built an overengineered content authoring pipeline
+*before* the game that consumes it. It made for a great genAI learning project, let me leverage my TTRPG GM knowledge and 
+helped me explore the building-blocks of storytelling through inverted control before futzing with a game. That said, by doing this I knowingly functionally wrote myself a blank check 
+for potential useless json fields, unnecessary strings and keys with the wrong voice, and half-built ideas that the bill has officially come due for. 
 Some of that was going to turn up no matter how careful about agentic workflow hygeine I'd
 been. And I *had* been careful: formal rules about player-facing text separate from data definitions, every display
-string keyed to a localizable sidecar table. Over a decade building games, much of it shoulder to
-shoulder with external studios trying to get things shippable, teaches you that
-localization is one of those problems that punishes the people who defer it,
-disproportionately. On mobile especially, an overflowed button or a stray `TODO` string
-has nowhere on the screen to hide and affects how the playable prototype *feels*.
+string keyed to a localizable sidecar table, and written voice rules for how I thought a string ought to be used in-game. 
+Over a decade building games, much of it spent trying to get things shippable, taught me that in a game like this, localization is one of those problems that punishes the people who defer it.
+HARD. On a mobile game especially, an overflowed button or a stray `TODO` string
+has nowhere to hide and meaningfully affects how the playable prototype *feels* to someone you hand your phone to at a party. 
+Ignore it, and you're stuck with baked text you can never retrieve and no strategy to guide that separation.
 
-So this was never going to be "I designed it right." It was going to be "I designed it
-carefully, and let's go see what actually happened."
+So this was never going to be an "I designed it right." moment, more like "I designed it
+thoughtfully while learning a new workflow, and it's time learn how to clean it up."
 
 ## The meter that looked right
 
 Over the long weekend, in the gaps between family time, I asked AI to build me a real 
 length-checker: a fit meter for *are my strings the right length?* I knew from playtesting the answer was largely no. 
-The first version rendered, and it looked like it agreed with my observed experience.
+The first set of meters rendered, and the amount of red I saw felt like it confirmed my hypothesis. Except it felt far too easy.
 
 <Figure
   src="/insights/localization/fillcap-ui.png"
@@ -71,36 +70,36 @@ The first version rendered, and it looked like it agreed with my observed experi
 
 ## I asked where the mapping came from. Claude told me it guessed.
 
-I got the little hit of excitement, my pain point solved, and then I asked the
-one question that unravels everything: how does it know *that* string lands in
+That hit of excitement, the idea that my pain point was already solved- then I asked: how do you know *that* string lands in
 *that* box?
 
-It didn't. It had pattern-matched a plausible mapping and measured fit against it.
-The geometry was honest, the box really did hold about ten characters, but the
-claim that a given sentence lived in that box was invented. A fit check against a
-guessed mapping can be confidently, uselessly wrong: it might be measuring the
-right string against the wrong box entirely.
+Long story short, it didn't. It had pattern-matched a plausible mapping based on string keys, 
+scenes and textbox names, and measured a character fit against it using the properties of the TMP object.
+The geometry was honest, the box really did hold about ten characters in that font at that size, but the
+claim that a given sentence lived in that box was quietly invented.
 
 <PullQuote>
 A meter that measures a guess isn't a measurement. It's a goose chase.
 </PullQuote>
 
-## Guessing smarter doesn't work
+## Whack-a-symptom vs pushing for RCA
 
-My first fix was the obvious one: ground the mapping in truth by having the AI
-trace the code. It built a strategy that assumed **static** localization keys, and
-that fell apart immediately, because my keys aren't static. They're assembled at
-runtime from tokens, in-game variables, and content ids. Tracing source for a string 
-that doesn't exist as a literal until the game builds it is a dead end.
+My first fix was the obvious one: I told it to ground the mapping in truth by having the AI trace the code, inspecting Unity scenes for TMP objects to build a real map with. 
+It built a strategy that assumed the game used **static** localization keys, and of course, that fell apart immediately.
+Almost all of my keys leverage the fact that each encounter is authored with multiple rounds, multiple possible skill-checks to 
+move to the next beat of the story. They're assembled at runtime from tokens, in-game variables, and content ids. But I will say that 
+I did get an awesome TMP extension that let's me push all my static UI labels directly from the Unity Editor out of this step, so it wasn't a total loss :) 
 
-The reframe came when I noticed the fit bug had siblings. Hardcoded strings, an
-enum printed straight to a label with `.ToString()`, baked placeholder text in a
-prefab, were the *same disease*: text reaching the player without going through my
-localization system at all. Little shortcuts that come from using AI agents to build a 
-prototype quickly and pivoting constantly. I stopped chasing the one symptom and went 
-looking for a root-cause solution to the whole class.
+This challenged me to articulate the problem's surface area more concretely, and classify all of the invisible 
+localization issues I wanted to fix. Hardcoded strings, incorrect voice fonts, an enum printed straight to a label with `.ToString()`, 
+baked placeholder text in a prefab, setting `.text=` directly, were the *same problem*: text reaching the player's screen without going through the 
+localization system properly. Basically interest on all of the little shortcuts that AI agents might use to build a 
+prototype quickly (not to mention a pesky human who likes to manually pivot/prototype while trying to make the game fun). 
+I stopped chasing each symptom and went looking for a solution to my need: I need to understand where the gaps are 
+so that I can decide whether I need a validator, new copy, or a completely different UX. And in order to do that, I 
+needed to know exactly what text boxes shown to the player, and what contents they were displaying.
 
-Here's the whole class, caught in the act, one screen per way text reaches a player wrong:
+Here's a number of sneaky strings, caught in the act, each one wrong for different reasons:
 
 <Carousel slides={[
   { src: "/insights/localization/mainmenu-familiar-v1.png", alt: "A phone-framed game screen in a paper-collage style: HP and RP stamps up top, a long scenario paragraph about a caravan camp that clips mid-sentence at 'she's half-', and an OBSERVE action card below with a difficulty timer.", caption: "This is Familiar in play: you read a scene and choose how to nudge the hero. Rough by choice, this is storyboard, not final art. And already the scenario text clips mid-word, 'she's half-', because it overran its box." },
@@ -116,15 +115,14 @@ so a shop row or an item card doesn't even exist in the scene file to inspect.
 There was nothing to read.
 </Breakout>
 
-And the guess wasn't just unfounded, it was actively hiding things. The first few
-passes were very messy. Following the localization keys to the logical place in-game 
-also failed; I had inadvertently allowed my team to define strings that served the 
-same purpose. My UI localization file had different copy explaining the influence 
-actions available to the player than the per-familiar flavored explanations (when I 
-built the content pipeline, I figured a wolf would observe differently than an owl, 
-smelling things versus a birds eye view). Putting the content pipeline before the game was 
-right for this kind of exploratory project, but obviously pipeline engineers disagree 
-with UI/UX developers all the time. I just happened to be both and also neither.
+The first few passes were very messy. Following the localization keys to the logical place in-game was a doomed strategy 
+because I'd started with a content pipeline rather than a game. Over the course of building my schema and localization strategy, 
+I had described the 'Distract' action from both the familiars perspective ("You bark loudly, drawing attention away from {PC_NAME}" and 
+"Swooping with a flash of feather, you feel eyes on you as {PC_NAME} acts") - 
+separate from using the game explanation voice ("Lowers the DC of {PC_NAME} by 2"). 
+In this version of the game, the per-familiar narrative strings were never used, but the explanation text was. 
+The strings and the question of their utility had long been forgotten - I needed my dashboard to 
+help me see what was and wasn't being used so that I could make the decision of whether the game needed it.
 
 <Figure
   src="/insights/localization/early-dashboard-view.png"
@@ -132,33 +130,32 @@ with UI/UX developers all the time. I just happened to be both and also neither.
   caption="The tell: a SCROLL box, uncapped, check skipped. The guessed binding parked strings in a box that never length-checks, so their overflows never surfaced. Note the 'Georgia → want Oswald' rows too: those are the influence lines, flagged wrong-voiced."
 />
 
-## Stop guessing about the project; record what happens at runtime
+## Put out-of-the-box thinking inside the box
 
-Here's the aha. There is exactly one instant when the key and the box are both in
-hand: the moment you assign the text. So I made that a single choke-point
-function and had it keep a receipt. I built a runtime ledger to act as the source 
-of truth for which keys got localized to what boxes with what settings.
+Somewhere in between family activities, my brain caught up with the clear solution. 
+There is exactly one instant when the key and the box are both in hand: the moment you assign the text. 
+I built a runtime ledger to act as the source of truth for which keys got localized to what boxes with what settings. 
 
-The one canonical setter resolves the key, substitutes tokens, assigns the box,
+The canonical localization setter resolves the key, substitutes tokens, assigns the box,
 and, in the editor only, records `key → box → value` to a ledger with zero
-inference. That ledger, built out of the running game, sets the pattern. It
-costs nothing in the shipped build; the instrumentation exists only where dev
-and QA happen, a fine place to take a performance hit.
+inference. That ledger, built out of the running game, serves as the source of truth for what goes through the 
+localization system. It costs nothing in the shipped build; the instrumentation exists only where dev
+and QA happen (a fine place to take a performance hit).
 
 <Insight sells="root-cause instrumentation">
 The move that generalizes past this game: when truth is impossible to infer
 everywhere, define a source of truth you can defend, and record it there.
-I didn't teach a tool to guess better. I found the one line of code that already
+I didn't teach a tool to guess better. I found the one class that already
 knew the answer and promoted it to accountant.
 </Insight>
 
 I built the ledger to accumulate across play sessions and clear on demand,
-because one playthrough rarely touches every scene. The commit history from that
-weekend is a run of fast checkpoints, not thrashing: I knew the shape I wanted.
-I was building a cohesive strategy to enforce my "localization as a first-class citizen" principle.
+because one playthrough rarely touches every scene. I was building a cohesive strategy to enforce 
+"localization as a first-class citizen" without needing to build a fully automated regression test setup
+ for a prototype-stage game.
 
 Then I put it where I'd trip over it. The ledger lives in the Unity editor where I playtest, 
-and every time I play the game or spot-check a feature,the receipt is right there.
+and every time I play the game or spot-check a feature, the receipt is right there.
 
 <Figure
   src="/insights/localization/runtime-ledger-unity-editortool.png"
@@ -170,16 +167,15 @@ and every time I play the game or spot-check a feature,the receipt is right ther
 Don't hide the mess. Make the reconciliation between intent and what's actually happening something I can't ignore.
 </PullQuote>
 
-## The ledger has its own blind spot
+## One accountant wasn't enough for the complete picture
 
-Then the ledger tried to fool me the same way the meter had, and this time I saw
-it coming. By construction, a ledger only records text that went *through* the localization 
-system. It is totally blind to exactly the class of issues I cared about most: 
-baked prefab text, the `enum.ToString()`, the raw literal. A clean-looking ledger can
-still be missing every un-localized string in the game.
+Then the ledger tried to fool me the same way the meter had, but this time I saw
+it coming. The ledger only records text that already went *through* the localization 
+system. It is totally blind to everything else: baked prefab text, the `enum.ToString()`, the raw literal. 
+A clean-looking ledger can still be missing every un-localized string in the game.
 
-So I built its complement: a census that walks every text box that actually gets 
-rendered, localized or not. The set difference is the whole point.
+So I built another Editor-only complement: a census that records every text box that actually gets 
+rendered, localized or not. The reconciliation layer is where the magic happens.
 
 ```
 census   = every TMP box that displayed real copy   (what the player saw)
@@ -188,20 +184,20 @@ ledger   = every TMP box localized in-game     (what went through the system)
 census ∖ ledger = copy that rendered without being localized
 ```
 
-Immediately it earned its keep, and in a way I didn't expect. The census flagged a
-whole family of strings, plot-resource grants, the familiar overhearing a rumor by the
-fire, that I'd authored but never wired into the game. They had no in-game home at all.
-This is exactly the archaeology a content-pipeline-first project generates: copy written
-ahead of the scene that would show it, moving so fast at a part-time tinkering pace that
-I'd genuinely forgotten these lines existed. That's part of the magic of building this
-way, and part of the mess.
+Immediately the census flagged a whole family of strings (plot-resource grants) - 
+basically the familiar overhearing a rumor that drives plot -  
+that I'd authored but never wired into the flow of the game.
+This is another content-pipeline-first project problem: copy written 
+ahead of the scene that would show it, moving so fast that I'd genuinely forgotten these 
+(load bearing) lines existed. Oops! The game worked without them, but I'd definitely 
+felt like the narrative pacing was off for a while. 
 
 The AI wanted to suppress the finding, because there were *so many* of them, surely the
-check was miscalibrated. I stopped it. I threw a mockup dialogue into the scene just to
-see whether the ledger would catch it, and went to go live my weekend. I came back to
-find the placeholder title missing and no keys defined for any of the rumor types I'd
-already authored. The tool was finally fulfilling the promise of genAI native development: 
-showing me the gap beween my ask for the prototype and what I needed in-game.
+check was miscalibrated. I stopped it. I threw a mockup dialogue into the scene just to 
+see whether the ledger would catch it, and went to go live my weekend. I came back to 
+find the dialog title flagged as a gap, but the strings verified. The tool was finally 
+fulfilling the need I had of genAI native development: 
+showing me the gap beween two systems that had been authored independently.
 
 <Figure
   src="/insights/localization/grantdialog.png"
@@ -210,23 +206,25 @@ showing me the gap beween my ask for the prototype and what I needed in-game.
 />
 
 <Breakout kind="principle">
-Don't turn the metric green. The AI's instinct when a check screams was to assume
+Don't just turn the dashboard green. The AI's instinct when a check screamed was to assume
 the check was broken and quiet it, or infer why the rule was wrong (no schema contracts 
 for localization tokens was an early choice I'd made to support iteration). The check was 
 the only thing telling the truth. A good dashboard cannot hide the signal, even when the signal 
-appears overwhelming, like it did to the AI agent implementing it.
+appears overwhelming, like it did to the poor AI agent implementing it.
 </Breakout>
 
 ## One string vouches for a thousand
 
-Because localization keys are tokenized and dynamic, showing a *single* rumor in-game
-proved the box for the *whole family*. The last piece was teaching the tool how my keys
-are actually assembled: that a key is built at runtime from parts like `influenceAction`,
-`roundNumber`, and `skillCheck`. Once the pattern-matcher knew those were the moving
-pieces, one observed string could stand in for every sibling that shares its shape. The
-code already routes every string in a family to the same box regardless of rumor id, so I
-let the code assert the route and the reconciliation confirm, refute, or leave that family
-of keys unproven. Every mapping now carries its provenance: how do I actually know this?
+Because localization keys are tokenized and dynamic, showing a *single* rumor in-game 
+proved the box for the *whole family*. The last piece was teaching the tool how my keys 
+are actually assembled: that a key is built at runtime from parts like `influenceAction`, 
+`roundNumber`, and `skillCheck`. I built a skill to scan localization files for patterns where 
+one observed string could stand in for every sibling that shares its shape, and review the 
+code to verify the pattern before adding it to a codepath ledger. 
+The same box will always display an overheard rumor, regardless of which rumor 
+the player hears, so this was a great example of where to let the code assert the route and 
+the reconciliation confirm, refute, or leave that family of keys unproven. 
+Every mapping now carries its provenance: how do I actually know this? 
 
 <StatRow>
   <Stat value="104" label="runtime-verified (the game showed us)" />
@@ -241,7 +239,7 @@ point: this got built in the margins of a real weekend, and the ledger reflects
 exactly where I left it as I enjoyed my time with my family.
 
 That's the ladder the whole weekend was climbing: a naive guess gets replaced by
-code-truth, which gets confirmed by observation. As I playtest more, I see strings 
+a better question, which gets confirmed by observation. As I playtest more, I see strings 
 move from "codepath confirmed" to "runtime verified" and know exactly why, when and how.
 
 ## The question I started with, finally answered
@@ -256,20 +254,19 @@ them are at risk against the placeholder box I dropped in.
   caption="Every rumor line, routed to the same 150-character grant box, overflowing: 270, 229, 227, 222. The fit question I opened the weekend with, finally asked against a mapping I could trust."
 />
 
-These overflows had been invisible the whole time, because the original hand guess
-had pointed the family at a scrolling box that never checks length. Fixing the
-*mapping* is what made the overflow findable. The measurement was never the hard
-part: it required grounding the idea of what is an acceptable assertion.
+The measurement was never the hard part: the first thing the AI produced was a quality check for 
+whether at a given font-size, a string would fit. Getting the game to a place where that check 
+could be used reliably as I prototype and add new boxes all the time, was a different challenge.
 
 ## A beautiful disaster, and I'm leaving it that way (for now)
 
 I could make every number on this dashboard go green tonight. Rewrite the prefab
 metadata to fix the font-voice warnings, migrate the hardcoded literals into the
 string tables, wire the unmapped strings to keys that mostly already exist. It's
-all mechanical but I haven't, and that's the whole crux of why I chose a dashboard at all. 
+mostly mechanical but I haven't, and that's the whole crux of why I chose a dashboard at all. 
 This is very much a prototype that needs time to breathe and no amount of AI-assisted 
 speed will tell me which of these numbers should be green, and which 
-aren't worth chasing at all because that's kind of the fun part anyway. Building a 
+aren't worth chasing at all. And that's kind of the fun part anyway. Building a 
 dashboard to set burndown goals is tempting in a lot of ways, but at this stage I 
 want to build dashboards to make sure I have the data to support my decisions.
 
@@ -286,14 +283,16 @@ curious about the next thing and wandered off to explore it. Rushing to clean it
 up would repeat the original mistake: freezing a contract, making rules for copy a game
 didn't actually support, vague voice rules not documented in a way the agents could adhere to, 
 on a game that hasn't finished deciding what it is. The rumor lines the census caught,
-the ones with nowhere to render yet? Deleted on purpose, not silenced.
+the ones with nowhere to render yet? Deleted on purpose, not silenced. In fact, a UX change 
+where longer narrative strings appear one sentence at a time was where I chose to go next after 
+reviewing the data in its entirety, and turning the dashboard green would have robbed me of the 
+opportunity to explore a more visual-novel inspired direction entirely which I'm loving.
 
-The instrument exists so I stay free to chase the fun, not just so the dashboard turns
-green (yet). Since the weekend in question, I've been able to make a lot of fast decisions. I've completely overhauled the UI/narrative flow, weighed 
+Since the weekend in question, I've been able to make a lot of fast decisions. I've completely overhauled the UI/narrative flow, weighed 
 the pros and cons of switching engines entirely via AI-driven analysis, and found (and fixed) a handful more 
 edge-cases that my reconciliation layer wasn't handling properly. The core strategy has proven itself out, and 
 it's something solodev and indies can introduce no matter where they are in the development cycle.
-<Conviction>Choosing to make localization a first-class constraint isn't possible for everyone, but a 
+<Conviction>Choosing to make localization a first-class constraint from a projects inception isn't possible for everyone, but a 
 path to giving players content in their native language should be.</Conviction> 
 
 <Figure
@@ -303,6 +302,8 @@ path to giving players content in their native language should be.</Conviction>
   caption="Some red badges (font mismatch) are a mechanical fix: a validator at CI. Most aren't. This scene overflowed, and the fix wasn't shorter copy, it was putting my UI/UX hat back on and rebuilding the layout so the whole beat fits one screen."
 />
 
-I hope this inspires someone to do more creating with genAI. These tools have amazing potential to help 
-people express and build on a schedule that matches their decision-making capacity. This experience reinforced 
-something that feels intuitive: the power of data, creative energy and willingness to hold boundaries.
+Sneaky strings are a fundamental part of the challenge I liked when taking on a part-time narrative game. 
+I've learned a lot about the shortcuts GenAI tools take, and I believe they have amazing potential to help 
+people express and build on a schedule that matches their life. I'd personally love to see more busy moms give it a try-
+we've got amazing stories to tell and holding boundaries, exercising judgement, and the magic 
+of creative play are all core to the experiences we share.
